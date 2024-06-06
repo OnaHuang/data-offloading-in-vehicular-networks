@@ -37,5 +37,3 @@ None
 AOB 
 === 
 None
-
-test sync
