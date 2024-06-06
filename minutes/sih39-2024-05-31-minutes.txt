@@ -1,0 +1,39 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Friday, 31st May 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Friday, 31st May 2024 
+Version: 1.0
+
+Matters arising 
+===============
+None (First meeting)
+
+New business 
+============
+1. Read DIVINE research paper
+ACTION: sih39
+
+2. Get familiar with Git
+Some potential reference that could be usefu: 
+More resources from Software Engineering (CS22120) module
+https://git-scm.com/doc (Git official website)
+https://www.w3schools.com/git/ (W3Schools)
+https://www.atlassian.com/git (Atlassian)
+ACTION: sih39
+
+3. Create GitLab repository (https://gitlab.aber.ac.uk) and add Yasir (yss1@aber.ac.uk) atleast as a reporter.
+ACTION: sih39
+
+4. Set up OMNeT++, SUMO and Veins using the tutorial available at https://veins.car2x.org/tutorial/
+ACTION: sih39
+
+Future Tasks
+=============
+None
+
+AOB 
+=== 
+None
