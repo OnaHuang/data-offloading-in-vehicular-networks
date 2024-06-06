@@ -32,8 +32,5 @@ ACTION: sih39
 
 Future Tasks
 =============
-None
 
-AOB 
-=== 
-None 
+
