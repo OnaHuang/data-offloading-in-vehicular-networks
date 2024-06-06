@@ -37,7 +37,3 @@ None
 AOB 
 === 
 None
-
-test push
-
-test sync1
