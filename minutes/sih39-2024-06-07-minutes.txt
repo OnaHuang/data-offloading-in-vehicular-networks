@@ -1,0 +1,58 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Friday, 7th June 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Friday, 7th June 2024 
+Version: 1.0
+
+Matters arising 
+===============
+1. Read DIVINE research paper
+ACTION: sih39
+Status: Done
+Siwei decided to work on the topic of trust management in vehicular networks.
+
+2. Get familiar with Git
+Some potential reference that could be usefu: 
+More resources from Software Engineering (CS22120) module
+https://git-scm.com/doc (Git official website)
+https://www.w3schools.com/git/ (W3Schools)
+https://www.atlassian.com/git (Atlassian)
+ACTION: sih39
+Status: Done
+
+3. Create GitLab repository (https://gitlab.aber.ac.uk) and add Yasir (yss1@aber.ac.uk) atleast as a reporter.
+ACTION: sih39
+Status: Done
+
+4. Set up OMNeT++, SUMO and Veins using the tutorial available at https://veins.car2x.org/tutorial/
+ACTION: sih39
+Status: Done
+
+New business 
+============
+1. Explore running the simulations using SUMO GUI by using the following command: 
+/c/Users/user/src/veins-5.2/bin/veins_launchd -vv -c /c/Users/user/src/sumo-1.8.0/bin/sumo-gui.exe 
+instead of
+/c/Users/user/src/veins-5.2/bin/veins_launchd -vv -c /c/Users/user/src/sumo-1.8.0/bin/sumo.exe
+ACTION: sih39
+
+2. Follow SUMO beginner tutorials to understand how SUMO works and how to create various SUMO scenarios at:
+https://sumo.dlr.de/docs/Tutorials/index.html
+ACTION: sih39
+
+3. Explore and understand the backend files when example simulation runs. 
+- You can explore files under samples/veins/src/veins/modules/application/ directory
+- You can use "std::cout" to print on IDE console and "EV_INFO" to print on OMNeT++ console
+- Try to create new functions of onBSM inside RSU and vehicle applications and play with them to handle things differently. 
+ACTION: sih39
+
+Future Tasks
+=============
+None
+
+AOB 
+=== 
+None
