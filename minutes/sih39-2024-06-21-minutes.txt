@@ -1,0 +1,61 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Friday, 21st June 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Friday, 21st June 2024 
+Version: 1.0
+
+Matters arising 
+===============
+1. Install OMNeT++ 5.5.1 and try to run the veins code available at https://github.com/yasirsaleem/vanet-required-metrics repository.
+ACTION: sih39
+Status: Done
+Installed OMNeT++ 5.5.1 but MetricAnalysis code still does not build.
+
+2. Explore and understand the backend files when example simulation runs. 
+- You can explore files under samples/veins/src/veins/modules/application/ directory
+- You can use "std::cout" to print on IDE console and "EV_INFO" to print on OMNeT++ console
+- Try to create new functions of onBSM inside RSU and vehicle applications and play with them to handle things differently. 
+ACTION: sih39
+Status: Done
+
+3. Investigate running a simple SUMO network (hello world scenario) and try to faimilarise yourself about how things work in OMNeT++ and veins. 
+ACTION: sih39
+Status: Done
+
+4. Search some reserach papers on trust management in vehicular newtorks, read their abstract, introduction, conclusion and go through the papers. Then shortlist the papers which are more relevant to you. 
+Some keywords to consider are: 
+- Trust management in Internet of Vehicles
+- Trust management in IoVs
+- Trust management in vehicular networks
+- Trust management in vehicular ad hoc networks
+- Trust management in VANETs
+- Trust management in Intelligent Transportation Systems
+- Trust management in ITS
+ACTION: sih39
+Status: Ongoing
+Downloaded papers, now will read their abstract, introduction, conclusion and going through the papers. 
+
+New business 
+============
+1. Read the abstract, introduction, conclusion and going through the downloaded papers.
+ACTION: sih39
+
+2. Create your own copies of MyVeinsBaseApp, MyVeinsRSUApp and MyVeinsVehicleApp and make them working with simple network scenario. 
+ACTION: sih39
+
+3. Read and understand the provided draft of paper on Trust in IoV. 
+ACTION: sih39
+
+4. Take insights from the GitHub code of MetricsAnalysis project and try to understand how things work. 
+ACTION: sih39
+
+Future Tasks
+=============
+None
+
+AOB
+=== 
+None
