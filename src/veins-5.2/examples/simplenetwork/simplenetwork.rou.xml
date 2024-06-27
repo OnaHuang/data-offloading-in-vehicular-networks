@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 06/27/24 22:47:16 by Eclipse SUMO netedit Version 1.8.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <processing>
+        <offset.disable-normalization value="true"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+    </junctions>
+
+    <netedit>
+        <route-files value="D:\sumo-1.8.0\bin\simplenetwork.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <route edges="gneE6 gneE7" color="yellow" id="route_0"/>
+    <route edges="gneE8 gneE9" color="yellow" id="route_1"/>
+    <route edges="gneE10 gneE11" color="yellow" id="route_2"/>
+    <route edges="gneE12 gneE13" color="yellow" id="route_3"/>
+    <trip id="vehicle_0" depart="0.00" from="gneE6" to="gneE7"/>
+    <trip id="vehicle_1" depart="0.00" from="gneE8" to="gneE9"/>
+    <trip id="vehicle_2" depart="0.00" from="gneE10" to="gneE11"/>
+    <trip id="vehicle_3" depart="0.00" from="gneE12" to="gneE13"/>
+</routes>
