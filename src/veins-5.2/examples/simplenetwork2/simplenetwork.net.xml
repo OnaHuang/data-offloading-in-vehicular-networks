@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 06/28/24 11:30:40 by Eclipse SUMO netedit Version 1.8.0
+<!-- generated on 06/27/24 22:50:47 by Eclipse SUMO netedit Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
-    <input>
-        <sumo-net-file value="D:\OneDrive%20-%20Aberystwyth%20University\Aberystwyth%20University\MSc\MSc%20Project\msc-project\src\veins-5.2\examples\simplenetwork\simplenetwork.net.xml"/>
-    </input>
-
     <output>
-        <output-file value="D:\OneDrive%20-%20Aberystwyth%20University\Aberystwyth%20University\MSc\MSc%20Project\msc-project\src\veins-5.2\examples\simplenetwork\simplenetwork.net.xml"/>
+        <output-file value="D:\sumo-1.8.0\bin\simplenetwork.net.xml"/>
     </output>
 
     <processing>
-        <geometry.min-radius.fix.railways value="false"/>
-        <geometry.max-grade.fix value="false"/>
         <offset.disable-normalization value="true"/>
-        <lefthand value="false"/>
     </processing>
 
     <junctions>
         <no-turnarounds value="true"/>
-        <junctions.corner-detail value="5"/>
-        <junctions.limit-turn-speed value="5.5"/>
-        <rectangular-lane-cut value="false"/>
     </junctions>
 
-    <pedestrian>
-        <walkingareas value="false"/>
-    </pedestrian>
+    <netedit>
+        <route-files value="D:\sumo-1.8.0\bin\simplenetwork.rou.xml"/>
+    </netedit>
 
     <report>
         <aggregate-warnings value="5"/>
@@ -38,7 +28,7 @@
 
 <net version="1.6" junctionCornerDetail="5" limitTurnSpeed="5.50" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
 
-    <location netOffset="0.00,0.00" convBoundary="0.00,-2000.00,550.00,450.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
+    <location netOffset="0.00,0.00" convBoundary="0.00,-50.00,550.00,450.00" origBoundary="10000000000.00,10000000000.00,-10000000000.00,-10000000000.00" projParameter="!"/>
 
     <edge id=":11_0" function="internal">
         <lane id=":11_0_0" index="0" speed="13.89" length="0.10" shape="551.60,250.00 551.60,250.00"/>
@@ -47,7 +37,7 @@
         <lane id=":2_0_0" index="0" speed="13.89" length="0.10" shape="200.00,-1.60 200.00,-1.60"/>
     </edge>
     <edge id=":5_0" function="internal">
-        <lane id=":5_0_0" index="0" speed="13.89" length="0.10" shape="200.00,-1998.40 200.00,-1998.40"/>
+        <lane id=":5_0_0" index="0" speed="13.89" length="0.10" shape="200.00,-48.40 200.00,-48.40"/>
     </edge>
     <edge id=":8_0" function="internal">
         <lane id=":8_0_0" index="0" speed="13.89" length="0.10" shape="498.40,250.00 498.40,250.00"/>
@@ -72,10 +62,10 @@
         <lane id="gneE7_0" index="0" speed="13.89" length="200.00" shape="200.00,-1.60 400.00,-1.60"/>
     </edge>
     <edge id="gneE8" from="6" to="5" priority="-1">
-        <lane id="gneE8_0" index="0" speed="13.89" length="200.00" shape="400.00,-1998.40 200.00,-1998.40"/>
+        <lane id="gneE8_0" index="0" speed="13.89" length="200.00" shape="400.00,-48.40 200.00,-48.40"/>
     </edge>
     <edge id="gneE9" from="5" to="4" priority="-1">
-        <lane id="gneE9_0" index="0" speed="13.89" length="200.00" shape="200.00,-1998.40 0.00,-1998.40"/>
+        <lane id="gneE9_0" index="0" speed="13.89" length="200.00" shape="200.00,-48.40 0.00,-48.40"/>
     </edge>
 
     <junction id="1" type="dead_end" x="0.00" y="0.00" incLanes="" intLanes="" shape="0.00,0.00 0.00,-3.20"/>
@@ -88,11 +78,11 @@
         <request index="0" response="0" foes="0" cont="0"/>
     </junction>
     <junction id="3" type="dead_end" x="400.00" y="0.00" incLanes="gneE7_0" intLanes="" shape="400.00,-3.20 400.00,0.00"/>
-    <junction id="4" type="dead_end" x="0.00" y="-2000.00" incLanes="gneE9_0" intLanes="" shape="0.00,-1996.80 0.00,-2000.00"/>
-    <junction id="5" type="priority" x="200.00" y="-2000.00" incLanes="gneE8_0" intLanes=":5_0_0" shape="200.00,-1996.80 200.00,-2000.00 200.00,-1996.80">
+    <junction id="4" type="dead_end" x="0.00" y="-50.00" incLanes="gneE9_0" intLanes="" shape="0.00,-46.80 0.00,-50.00"/>
+    <junction id="5" type="priority" x="200.00" y="-50.00" incLanes="gneE8_0" intLanes=":5_0_0" shape="200.00,-46.80 200.00,-50.00 200.00,-46.80">
         <request index="0" response="0" foes="0" cont="0"/>
     </junction>
-    <junction id="6" type="dead_end" x="400.00" y="-2000.00" incLanes="" intLanes="" shape="400.00,-2000.00 400.00,-1996.80"/>
+    <junction id="6" type="dead_end" x="400.00" y="-50.00" incLanes="" intLanes="" shape="400.00,-50.00 400.00,-46.80"/>
     <junction id="7" type="dead_end" x="500.00" y="450.00" incLanes="" intLanes="" shape="500.00,450.00 496.80,450.00"/>
     <junction id="8" type="priority" x="500.00" y="250.00" incLanes="gneE10_0" intLanes=":8_0_0" shape="496.80,250.00 500.00,250.00 496.80,250.00">
         <request index="0" response="0" foes="0" cont="0"/>
