@@ -21,57 +21,32 @@
 //
 
 #include "veins/modules/application/traci/MyVeinsRSUApp.h"
+//#include "veins/modules/application/traci/MyVeinsMessage_m.h"
+#include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
 
 using namespace veins;
+using namespace std;
 
 Define_Module(veins::MyVeinsRSUApp);
 
-void MyVeinsRSUApp::initialize(int stage)
+void MyVeinsRSUApp::onWSA(DemoServiceAdvertisment* wsa)
 {
-    MyVeinsBaseApp::initialize(stage);
-    if (stage == 0) {
-        // Initializing members and pointers of your application goes here
-        EV << "Initializing " << par("appName").stringValue() << std::endl;
-    }
-    else if (stage == 1) {
-        // Initializing members that require initialized other modules goes here
+    // if this RSU receives a WSA for service 42, it will tune to the chan
+    if (wsa->getPsid() == 42) {
+        mac->changeServiceChannel(static_cast<Channel>(wsa->getTargetChannel()));
     }
 }
 
-void MyVeinsRSUApp::finish()
+void MyVeinsRSUApp::onWSM(BaseFrame1609_4* frame)
 {
-    MyVeinsBaseApp::finish();
-    // statistics recording goes here
+    TraCIDemo11pMessage* wsm = check_and_cast<TraCIDemo11pMessage*>(frame);
+
+    // this rsu repeats the received traffic update in 2 seconds plus some random delay
+    sendDelayedDown(wsm->dup(), 2 + uniform(0.01, 0.2));
 }
 
 void MyVeinsRSUApp::onBSM(DemoSafetyMessage* bsm)
 {
-    // Your application has received a beacon message from another car or RSU
-    // code for handling the message goes here
-}
+    cout<<"----------------------onBSM---------------------"<<endl;
 
-void MyVeinsRSUApp::onWSM(BaseFrame1609_4* wsm)
-{
-    // Your application has received a data message from another car or RSU
-    // code for handling the message goes here, see TraciDemo11p.cc for examples
-}
-
-void MyVeinsRSUApp::onWSA(DemoServiceAdvertisment* wsa)
-{
-    // Your application has received a service advertisement from another car or RSU
-    // code for handling the message goes here, see TraciDemo11p.cc for examples
-}
-
-void MyVeinsRSUApp::handleSelfMsg(cMessage* msg)
-{
-    MyVeinsBaseApp::handleSelfMsg(msg);
-    // this method is for self messages (mostly timers)
-    // it is important to call the MyVeinsBaseApp function for BSM and WSM transmission
-}
-
-void MyVeinsRSUApp::handlePositionUpdate(cObject* obj)
-{
-    MyVeinsBaseApp::handlePositionUpdate(obj);
-    // the vehicle has moved. Code that reacts to new positions goes here.
-    // member variables such as currentPosition and currentSpeed are updated in the parent class
 }

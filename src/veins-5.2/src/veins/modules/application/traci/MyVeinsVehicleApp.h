@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "veins/veins.h"
+//#include "veins/veins.h"
 
 #include "MyVeinsBaseApp.h"
 
@@ -43,12 +43,16 @@ namespace veins {
 class VEINS_API MyVeinsVehicleApp : public MyVeinsBaseApp {
 public:
     void initialize(int stage) override;
-    void finish() override;
 
 protected:
-    void onBSM(DemoSafetyMessage* bsm) override;
+    simtime_t lastDroveAt;
+    bool sentMessage;
+    int currentSubscribedServiceId;
+
+protected:
     void onWSM(BaseFrame1609_4* wsm) override;
     void onWSA(DemoServiceAdvertisment* wsa) override;
+    void onBSM(DemoSafetyMessage* bsm) override;
 
     void handleSelfMsg(cMessage* msg) override;
     void handlePositionUpdate(cObject* obj) override;

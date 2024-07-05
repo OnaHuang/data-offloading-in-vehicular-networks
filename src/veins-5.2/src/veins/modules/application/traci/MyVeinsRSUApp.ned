@@ -29,5 +29,5 @@ import org.car2x.veins.modules.application.traci.MyVeinsBaseApp;
 simple MyVeinsRSUApp extends MyVeinsBaseApp
 {
     @class(veins::MyVeinsRSUApp);
-    string appName = default("My first Veins App!");
+    string appName = default("My first Veins RSUApp!");
 }

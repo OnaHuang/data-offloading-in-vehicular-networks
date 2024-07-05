@@ -27,6 +27,7 @@ using namespace veins;
 void MyVeinsBaseApp::initialize(int stage)
 {
     BaseApplLayer::initialize(stage);
+    std::cout<<"------------------------initialise Base-------------------"<<endl;
 
     if (stage == 0) {
 

@@ -30,6 +30,7 @@ Define_Module(veins::TraCIDemo11p);
 
 void TraCIDemo11p::initialize(int stage)
 {
+    std::cout<<"------------------initialise---------------"<<endl;
     DemoBaseApplLayer::initialize(stage);
     if (stage == 0) {
         sentMessage = false;

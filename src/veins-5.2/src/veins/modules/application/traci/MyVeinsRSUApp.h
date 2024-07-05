@@ -41,17 +41,10 @@ namespace veins {
  */
 
 class VEINS_API MyVeinsRSUApp : public MyVeinsBaseApp {
-public:
-    void initialize(int stage) override;
-    void finish() override;
-
 protected:
-    void onBSM(DemoSafetyMessage* bsm) override;
     void onWSM(BaseFrame1609_4* wsm) override;
     void onWSA(DemoServiceAdvertisment* wsa) override;
-
-    void handleSelfMsg(cMessage* msg) override;
-    void handlePositionUpdate(cObject* obj) override;
+    void onBSM(DemoSafetyMessage* bsm) override;
 };
 
 } // namespace veins

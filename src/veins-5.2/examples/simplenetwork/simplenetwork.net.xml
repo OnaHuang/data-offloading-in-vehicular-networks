@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 06/28/24 11:30:40 by Eclipse SUMO netedit Version 1.8.0
+<!-- generated on 07/04/24 00:08:33 by Eclipse SUMO netedit Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
@@ -38,66 +38,66 @@
 
 <net version="1.6" junctionCornerDetail="5" limitTurnSpeed="5.50" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
 
-    <location netOffset="0.00,0.00" convBoundary="0.00,-2000.00,550.00,450.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
+    <location netOffset="0.00,0.00" convBoundary="0.00,-2000.00,2300.00,150.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
 
     <edge id=":11_0" function="internal">
-        <lane id=":11_0_0" index="0" speed="13.89" length="0.10" shape="551.60,250.00 551.60,250.00"/>
+        <lane id=":11_0_0" index="0" speed="13.89" length="0.10" shape="2301.60,-850.00 2301.60,-850.00"/>
     </edge>
     <edge id=":2_0" function="internal">
-        <lane id=":2_0_0" index="0" speed="13.89" length="0.10" shape="200.00,-1.60 200.00,-1.60"/>
+        <lane id=":2_0_0" index="0" speed="13.89" length="0.10" shape="1000.00,-1901.60 1000.00,-1901.60"/>
     </edge>
     <edge id=":5_0" function="internal">
-        <lane id=":5_0_0" index="0" speed="13.89" length="0.10" shape="200.00,-1998.40 200.00,-1998.40"/>
+        <lane id=":5_0_0" index="0" speed="13.89" length="0.10" shape="1000.00,-1998.40 1000.00,-1998.40"/>
     </edge>
     <edge id=":8_0" function="internal">
-        <lane id=":8_0_0" index="0" speed="13.89" length="0.10" shape="498.40,250.00 498.40,250.00"/>
+        <lane id=":8_0_0" index="0" speed="13.89" length="0.10" shape="2198.40,-850.00 2198.40,-850.00"/>
     </edge>
 
     <edge id="gneE10" from="7" to="8" priority="-1">
-        <lane id="gneE10_0" index="0" speed="13.89" length="200.00" shape="498.40,450.00 498.40,250.00"/>
+        <lane id="gneE10_0" index="0" speed="13.89" length="1000.00" shape="2198.40,150.00 2198.40,-850.00"/>
     </edge>
     <edge id="gneE11" from="8" to="9" priority="-1">
-        <lane id="gneE11_0" index="0" speed="13.89" length="200.00" shape="498.40,250.00 498.40,50.00"/>
+        <lane id="gneE11_0" index="0" speed="13.89" length="1000.00" shape="2198.40,-850.00 2198.40,-1850.00"/>
     </edge>
     <edge id="gneE12" from="12" to="11" priority="-1">
-        <lane id="gneE12_0" index="0" speed="13.89" length="200.00" shape="551.60,50.00 551.60,250.00"/>
+        <lane id="gneE12_0" index="0" speed="13.89" length="1000.00" shape="2301.60,-1850.00 2301.60,-850.00"/>
     </edge>
     <edge id="gneE13" from="11" to="10" priority="-1">
-        <lane id="gneE13_0" index="0" speed="13.89" length="200.00" shape="551.60,250.00 551.60,450.00"/>
+        <lane id="gneE13_0" index="0" speed="13.89" length="1000.00" shape="2301.60,-850.00 2301.60,150.00"/>
     </edge>
     <edge id="gneE6" from="1" to="2" priority="-1">
-        <lane id="gneE6_0" index="0" speed="13.89" length="200.00" shape="0.00,-1.60 200.00,-1.60"/>
+        <lane id="gneE6_0" index="0" speed="13.89" length="1000.00" shape="0.00,-1901.60 1000.00,-1901.60"/>
     </edge>
     <edge id="gneE7" from="2" to="3" priority="-1">
-        <lane id="gneE7_0" index="0" speed="13.89" length="200.00" shape="200.00,-1.60 400.00,-1.60"/>
+        <lane id="gneE7_0" index="0" speed="13.89" length="1000.00" shape="1000.00,-1901.60 2000.00,-1901.60"/>
     </edge>
     <edge id="gneE8" from="6" to="5" priority="-1">
-        <lane id="gneE8_0" index="0" speed="13.89" length="200.00" shape="400.00,-1998.40 200.00,-1998.40"/>
+        <lane id="gneE8_0" index="0" speed="13.89" length="1000.00" shape="2000.00,-1998.40 1000.00,-1998.40"/>
     </edge>
     <edge id="gneE9" from="5" to="4" priority="-1">
-        <lane id="gneE9_0" index="0" speed="13.89" length="200.00" shape="200.00,-1998.40 0.00,-1998.40"/>
+        <lane id="gneE9_0" index="0" speed="13.89" length="1000.00" shape="1000.00,-1998.40 0.00,-1998.40"/>
     </edge>
 
-    <junction id="1" type="dead_end" x="0.00" y="0.00" incLanes="" intLanes="" shape="0.00,0.00 0.00,-3.20"/>
-    <junction id="10" type="dead_end" x="550.00" y="450.00" incLanes="gneE13_0" intLanes="" shape="553.20,450.00 550.00,450.00"/>
-    <junction id="11" type="priority" x="550.00" y="250.00" incLanes="gneE12_0" intLanes=":11_0_0" shape="550.00,250.00 553.20,250.00 550.00,250.00">
+    <junction id="1" type="dead_end" x="0.00" y="-1900.00" incLanes="" intLanes="" shape="0.00,-1900.00 0.00,-1903.20"/>
+    <junction id="10" type="dead_end" x="2300.00" y="150.00" incLanes="gneE13_0" intLanes="" shape="2303.20,150.00 2300.00,150.00"/>
+    <junction id="11" type="priority" x="2300.00" y="-850.00" incLanes="gneE12_0" intLanes=":11_0_0" shape="2300.00,-850.00 2303.20,-850.00 2300.00,-850.00">
         <request index="0" response="0" foes="0" cont="0"/>
     </junction>
-    <junction id="12" type="dead_end" x="550.00" y="50.00" incLanes="" intLanes="" shape="550.00,50.00 553.20,50.00"/>
-    <junction id="2" type="priority" x="200.00" y="0.00" incLanes="gneE6_0" intLanes=":2_0_0" shape="200.00,0.00 200.00,-3.20 200.00,0.00">
+    <junction id="12" type="dead_end" x="2300.00" y="-1850.00" incLanes="" intLanes="" shape="2300.00,-1850.00 2303.20,-1850.00"/>
+    <junction id="2" type="priority" x="1000.00" y="-1900.00" incLanes="gneE6_0" intLanes=":2_0_0" shape="1000.00,-1900.00 1000.00,-1903.20 1000.00,-1900.00">
         <request index="0" response="0" foes="0" cont="0"/>
     </junction>
-    <junction id="3" type="dead_end" x="400.00" y="0.00" incLanes="gneE7_0" intLanes="" shape="400.00,-3.20 400.00,0.00"/>
+    <junction id="3" type="dead_end" x="2000.00" y="-1900.00" incLanes="gneE7_0" intLanes="" shape="2000.00,-1903.20 2000.00,-1900.00"/>
     <junction id="4" type="dead_end" x="0.00" y="-2000.00" incLanes="gneE9_0" intLanes="" shape="0.00,-1996.80 0.00,-2000.00"/>
-    <junction id="5" type="priority" x="200.00" y="-2000.00" incLanes="gneE8_0" intLanes=":5_0_0" shape="200.00,-1996.80 200.00,-2000.00 200.00,-1996.80">
+    <junction id="5" type="priority" x="1000.00" y="-2000.00" incLanes="gneE8_0" intLanes=":5_0_0" shape="1000.00,-1996.80 1000.00,-2000.00 1000.00,-1996.80">
         <request index="0" response="0" foes="0" cont="0"/>
     </junction>
-    <junction id="6" type="dead_end" x="400.00" y="-2000.00" incLanes="" intLanes="" shape="400.00,-2000.00 400.00,-1996.80"/>
-    <junction id="7" type="dead_end" x="500.00" y="450.00" incLanes="" intLanes="" shape="500.00,450.00 496.80,450.00"/>
-    <junction id="8" type="priority" x="500.00" y="250.00" incLanes="gneE10_0" intLanes=":8_0_0" shape="496.80,250.00 500.00,250.00 496.80,250.00">
+    <junction id="6" type="dead_end" x="2000.00" y="-2000.00" incLanes="" intLanes="" shape="2000.00,-2000.00 2000.00,-1996.80"/>
+    <junction id="7" type="dead_end" x="2200.00" y="150.00" incLanes="" intLanes="" shape="2200.00,150.00 2196.80,150.00"/>
+    <junction id="8" type="priority" x="2200.00" y="-850.00" incLanes="gneE10_0" intLanes=":8_0_0" shape="2196.80,-850.00 2200.00,-850.00 2196.80,-850.00">
         <request index="0" response="0" foes="0" cont="0"/>
     </junction>
-    <junction id="9" type="dead_end" x="500.00" y="50.00" incLanes="gneE11_0" intLanes="" shape="496.80,50.00 500.00,50.00"/>
+    <junction id="9" type="dead_end" x="2200.00" y="-1850.00" incLanes="gneE11_0" intLanes="" shape="2196.80,-1850.00 2200.00,-1850.00"/>
 
     <connection from="gneE10" to="gneE11" fromLane="0" toLane="0" via=":8_0_0" dir="s" state="M"/>
     <connection from="gneE12" to="gneE13" fromLane="0" toLane="0" via=":11_0_0" dir="s" state="M"/>
