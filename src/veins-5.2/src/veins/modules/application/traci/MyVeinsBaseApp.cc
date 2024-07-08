@@ -23,11 +23,12 @@
 #include "MyVeinsBaseApp.h"
 
 using namespace veins;
+using namespace std;
 
 void MyVeinsBaseApp::initialize(int stage)
 {
     BaseApplLayer::initialize(stage);
-    std::cout<<"------------------------initialise Base-------------------"<<endl;
+    cout<<"------------------------initialise Base-------------------"<<endl;
 
     if (stage == 0) {
 

@@ -47,6 +47,12 @@ void MyVeinsRSUApp::onWSM(BaseFrame1609_4* frame)
 
 void MyVeinsRSUApp::onBSM(DemoSafetyMessage* bsm)
 {
-    cout<<"----------------------onBSM---------------------"<<endl;
+    cout<<"I RSU ,"<<bsm->getArrivalModuleId()+1<< myId <<", have received a beacon from "<< bsm->getSenderModuleId()+1 <<endl;
 
+}
+
+void MyVeinsRSUApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, int serial)
+{
+    MyVeinsBaseApp::populateWSM(wsm, rcvId, serial);
+    cout<<"I, RSU "<< myId <<", have sent a beacon"<<endl;
 }

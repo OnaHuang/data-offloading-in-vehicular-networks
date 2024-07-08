@@ -70,8 +70,7 @@ void MyVeinsVehicleApp::onWSM(BaseFrame1609_4* frame)
 
 void MyVeinsVehicleApp::onBSM(DemoSafetyMessage* bsm)
 {
-    cout<<"-----------------onBSM--------------------"<<endl;
-
+    cout<<"I vehicle ,"<<bsm->getArrivalModuleId()+1<< myId <<", have received a beacon from "<< bsm->getSenderModuleId()+1 <<endl;
 }
 
 void MyVeinsVehicleApp::handleSelfMsg(cMessage* msg)
@@ -124,4 +123,10 @@ void MyVeinsVehicleApp::handlePositionUpdate(cObject* obj)
     else {
         lastDroveAt = simTime();
     }
+}
+
+void MyVeinsVehicleApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, int serial)
+{
+    MyVeinsBaseApp::populateWSM(wsm, rcvId, serial);
+    cout<<"I, vehicle "<< myId <<", have sent a beacon"<<endl;
 }
