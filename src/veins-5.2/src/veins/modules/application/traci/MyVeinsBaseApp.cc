@@ -30,7 +30,7 @@ std::map<LAddress::L2Type, cModule*> veins::MyVeinsBaseApp::L2TocModule;
 void MyVeinsBaseApp::initialize(int stage)
 {
     BaseApplLayer::initialize(stage);
-    cout<<"------------------------initialise Base-------------------"<<endl;
+    //cout<<"------------------------initialise Base-------------------"<<endl;
 
     if (stage == 0) {
 
@@ -169,6 +169,11 @@ void MyVeinsBaseApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, i
         bsm->addBitLength(beaconLengthBits);
         wsm->setUserPriority(beaconUserPriority);
         bsm->setSenderId(myId);
+        if(isEvent){
+            bsm->setIsEvent(true);
+            bsm->setEventMsg("Traffic Accident!");
+            cout<<"set event Msg"<<endl;
+        }
     }
     else if (DemoServiceAdvertisment* wsa = dynamic_cast<DemoServiceAdvertisment*>(wsm)) {
         wsa->setChannelNumber(static_cast<int>(Channel::cch));

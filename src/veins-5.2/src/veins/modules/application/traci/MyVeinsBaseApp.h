@@ -171,6 +171,7 @@ protected:
     Coord curSpeed;
     LAddress::L2Type myId = 0;
     int mySCH;
+    bool isEvent = false;
 
     /* stats */
     uint32_t generatedWSMs;

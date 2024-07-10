@@ -31,12 +31,15 @@ Define_Module(veins::MyVeinsVehicleApp);
 
 void MyVeinsVehicleApp::initialize(int stage)
 {
-    cout<<"-----------------initialise--------------------"<<endl;
+    //cout<<"-----------------initialise--------------------"<<endl;
     MyVeinsBaseApp::initialize(stage);
     if (stage == 0) {
         sentMessage = false;
         lastDroveAt = simTime();
         currentSubscribedServiceId = -1;
+    }
+    if(myId == 40){
+        isEvent = true;
     }
 }
 
@@ -70,9 +73,12 @@ void MyVeinsVehicleApp::onWSM(BaseFrame1609_4* frame)
 
 void MyVeinsVehicleApp::onBSM(DemoSafetyMessage* bsm)
 {
-    //cout<<"I vehicle ,"<<bsm->getArrivalModuleId()+1<< myId <<", have received a beacon from "<< bsm->getSenderModuleId()+1 <<endl;
-    //cout<<"myId: "<<myId<<" my name: "<<L2TocModule[myId]->getFullName()<<"received beacon from: "<<bsm->getSenderId()<<" ,name: "<<L2TocModule[bsm->getSenderId()]->getFullName()<<endl;
-    cout<<"Ivehicle ,id: "<< myId <<"name: "<< L2TocModule[myId]->getFullName() <<", have received a beacon from "<<bsm->getSenderId()<<" ,name: "<< L2TocModule[bsm->getSenderId()]->getFullName() <<endl;
+    //cout<<"I, vehicle ,id: "<< myId <<", name: "<< L2TocModule[myId]->getFullName() <<", have received a beacon from "<<bsm->getSenderId()<<" ,name: "<< L2TocModule[bsm->getSenderId()]->getFullName() <<endl;
+    if(bsm->isEvent()){
+        cout<<"receive event message from: "<<L2TocModule[bsm->getSenderId()]->getFullName()<<" Msg: ";
+        cout<<bsm->getEventMsg()<<endl;
+        isEvent = true;
+    }
 }
 
 void MyVeinsVehicleApp::handleSelfMsg(cMessage* msg)
@@ -130,5 +136,5 @@ void MyVeinsVehicleApp::handlePositionUpdate(cObject* obj)
 void MyVeinsVehicleApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, int serial)
 {
     MyVeinsBaseApp::populateWSM(wsm, rcvId, serial);
-    cout<<"I, vehicle "<< myId <<", have sent a beacon"<<endl;
+    //cout<<"I, vehicle "<< myId <<", have sent a beacon"<<endl;
 }
