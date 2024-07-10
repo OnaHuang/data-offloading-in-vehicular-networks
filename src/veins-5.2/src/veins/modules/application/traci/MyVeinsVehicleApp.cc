@@ -70,7 +70,9 @@ void MyVeinsVehicleApp::onWSM(BaseFrame1609_4* frame)
 
 void MyVeinsVehicleApp::onBSM(DemoSafetyMessage* bsm)
 {
-    cout<<"I vehicle ,"<<bsm->getArrivalModuleId()+1<< myId <<", have received a beacon from "<< bsm->getSenderModuleId()+1 <<endl;
+    //cout<<"I vehicle ,"<<bsm->getArrivalModuleId()+1<< myId <<", have received a beacon from "<< bsm->getSenderModuleId()+1 <<endl;
+    cout<<"myId: "<<myId<<" my name: "<<L2TocModule[myId]->getFullName()<<endl;
+    cout<<"from: "<<bsm->getSenderId()<<" ,name: "<<L2TocModule[bsm->getSenderId()]->getFullName()<<endl;
 }
 
 void MyVeinsVehicleApp::handleSelfMsg(cMessage* msg)

@@ -135,6 +135,9 @@ protected:
     virtual void checkAndTrackPacket(cMessage* msg);
 
 protected:
+    cModule* host;
+    static std::map<LAddress::L2Type, cModule*> L2TocModule;
+
     /* pointers ill be set when used with TraCIMobility */
     TraCIMobility* mobility;
     TraCICommandInterface* traci;

@@ -25,6 +25,8 @@
 using namespace veins;
 using namespace std;
 
+std::map<LAddress::L2Type, cModule*> veins::MyVeinsBaseApp::L2TocModule;
+
 void MyVeinsBaseApp::initialize(int stage)
 {
     BaseApplLayer::initialize(stage);
@@ -83,7 +85,8 @@ void MyVeinsBaseApp::initialize(int stage)
 
         // store MAC address for quick access
         myId = mac->getMACAddress();
-
+        host = findHost();
+        L2TocModule[myId] = host;
         // simulate asynchronous channel access
 
         if (dataOnSch == true && !mac->isChannelSwitchingActive()) {
@@ -165,6 +168,7 @@ void MyVeinsBaseApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, i
         bsm->setChannelNumber(static_cast<int>(Channel::cch));
         bsm->addBitLength(beaconLengthBits);
         wsm->setUserPriority(beaconUserPriority);
+        bsm->setSenderId(myId);
     }
     else if (DemoServiceAdvertisment* wsa = dynamic_cast<DemoServiceAdvertisment*>(wsm)) {
         wsa->setChannelNumber(static_cast<int>(Channel::cch));

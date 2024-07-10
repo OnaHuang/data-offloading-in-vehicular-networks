@@ -29,4 +29,5 @@ namespace veins;
 packet DemoSafetyMessage extends BaseFrame1609_4 {
     Coord senderPos;
     Coord senderSpeed;
+    LAddress::L2Type senderId = -1;
 }
