@@ -47,7 +47,7 @@ void MyVeinsRSUApp::onWSM(BaseFrame1609_4* frame)
 
 void MyVeinsRSUApp::onBSM(DemoSafetyMessage* bsm)
 {
-    cout<<"I RSU ,"<<bsm->getArrivalModuleId()+1<< myId <<", have received a beacon from "<< bsm->getSenderModuleId()+1 <<endl;
+    cout<<"I RSU ,id: "<< myId <<", name: "<< L2TocModule[myId]->getFullName() <<", have received a beacon from "<<bsm->getSenderId()<<" ,name: "<< L2TocModule[bsm->getSenderId()]->getFullName() <<endl;
 
 }
 
