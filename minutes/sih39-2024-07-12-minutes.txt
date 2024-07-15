@@ -1,0 +1,37 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Friday, 12th July 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Friday, 12th July 2024 
+Version: 1.0
+
+Matters arising 
+===============
+1. Start implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+Status: Ongoing
+
+2. Write the summary of papers that you have read in your dissertation under Literature Review chapter.
+ACTION: sih39
+Status: Ongoing
+
+New business 
+============
+1. Implement the neighbor table containing node ids and last beacon received time.
+i.e., everytime a vehicle/RSU received a beacon from its neighbor (vehicle/RSU), add the node and beacon received time into the neighbor table if the node does not exist in the neighbor table. Otherwise, if the node exists in the neighbor table, then update the last beacon received time. 
+ACTION: sih39
+
+2. Implement the functionality of neighbors (RSU/vehicles) timeout based on the last beacon received time by using timetout threshold (i.e., 3 x beaconInterval). 
+ACTION: sih39
+
+3. Continie implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+
+4. Write the summary of papers that you have read in your dissertation under Literature Review chapter.
+ACTION: sih39
+
+AOB
+=== 
+None

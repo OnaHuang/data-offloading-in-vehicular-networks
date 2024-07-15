@@ -100,6 +100,7 @@ protected:
      *  @param serviceId a service ID to be used with the service
      *  @param serviceDescription a literal description of the service
      */
+
     virtual void startService(Channel channel, int serviceId, std::string serviceDescription);
 
     /** @brief stopping the service and advertising for it */
