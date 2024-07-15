@@ -327,3 +327,31 @@ void MyVeinsBaseApp::checkAndTrackPacket(cMessage* msg)
         generatedWSMs++;
     }
 }
+
+void MyVeinsBaseApp::onBSM(DemoSafetyMessage* bsm){
+    MyVeinsBaseApp::updateNeighbor(bsm->getSenderId(), simTime());
+    cout << myId<<" Neighbor Table:"<<endl;
+    for (const auto& neighbor : neighbors) {
+        cout << "Node ID: " << neighbor.first << ", Last Beacon: " << neighbor.second << endl;
+    }
+    MyVeinsBaseApp::removeExpiredNeighbors();
+    for (const auto& neighbor : neighbors) {
+        cout << "Node ID: " << neighbor.first << ", Last Beacon: " << neighbor.second << endl;
+    }
+}
+
+void MyVeinsBaseApp::updateNeighbor(int node_id, simtime_t last_beacon) {
+    neighbors[node_id] = last_beacon;
+}
+
+void MyVeinsBaseApp::removeExpiredNeighbors() {
+    simtime_t currentTime = simTime();
+    for (auto it = neighbors.begin(); it != neighbors.end(); ) {
+        if (currentTime - it->second > 3) {
+            cout << "Removing Node ID: " << it->first << " due to timeout."<<endl;
+            it = neighbors.erase(it);
+        } else {
+            ++it;
+        }
+    }
+}

@@ -83,7 +83,7 @@ protected:
     virtual void onWSM(BaseFrame1609_4* wsm){};
 
     /** @brief this function is called upon receiving a DemoSafetyMessage, also referred to as a beacon  */
-    virtual void onBSM(DemoSafetyMessage* bsm){};
+    virtual void onBSM(DemoSafetyMessage* bsm);
 
     /** @brief this function is called upon receiving a DemoServiceAdvertisement */
     virtual void onWSA(DemoServiceAdvertisment* wsa){};
@@ -135,6 +135,10 @@ protected:
      */
     virtual void checkAndTrackPacket(cMessage* msg);
 
+    virtual void updateNeighbor(int node_id, simtime_t last_beacon);
+
+    virtual void removeExpiredNeighbors();
+
 protected:
     cModule* host;
     static std::map<LAddress::L2Type, cModule*> L2TocModule;
@@ -185,6 +189,8 @@ protected:
     /* messages for periodic events such as beacon and WSA transmissions */
     cMessage* sendBeaconEvt;
     cMessage* sendWSAEvt;
+
+    std::map<int, simtime_t> neighbors;
 };
 
 } // namespace veins
