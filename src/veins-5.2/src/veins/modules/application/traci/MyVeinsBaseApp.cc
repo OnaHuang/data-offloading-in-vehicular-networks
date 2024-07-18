@@ -330,13 +330,13 @@ void MyVeinsBaseApp::checkAndTrackPacket(cMessage* msg)
 
 void MyVeinsBaseApp::onBSM(DemoSafetyMessage* bsm){
     MyVeinsBaseApp::updateNeighbor(bsm->getSenderId(), simTime());
-    cout << myId<<" Neighbor Table:"<<endl;
+    cout << L2TocModule[myId]->getFullName()<<" Neighbor Table:"<<endl;
     for (const auto& neighbor : neighbors) {
-        cout << "Node ID: " << neighbor.first << ", Last Beacon: " << neighbor.second << endl;
+        cout << "before removing Node ID: " << neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName() << ", Last Beacon: " << neighbor.second << endl;
     }
     MyVeinsBaseApp::removeExpiredNeighbors();
     for (const auto& neighbor : neighbors) {
-        cout << "Node ID: " << neighbor.first << ", Last Beacon: " << neighbor.second << endl;
+        cout << "after removing Node ID: " << neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName()<< ", Last Beacon: " << neighbor.second << endl;
     }
 }
 
@@ -347,8 +347,8 @@ void MyVeinsBaseApp::updateNeighbor(int node_id, simtime_t last_beacon) {
 void MyVeinsBaseApp::removeExpiredNeighbors() {
     simtime_t currentTime = simTime();
     for (auto it = neighbors.begin(); it != neighbors.end(); ) {
-        if (currentTime - it->second > 3) {
-            cout << "Removing Node ID: " << it->first << " due to timeout."<<endl;
+        if (currentTime - it->second > 0) {
+            cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
             it = neighbors.erase(it);
         } else {
             ++it;

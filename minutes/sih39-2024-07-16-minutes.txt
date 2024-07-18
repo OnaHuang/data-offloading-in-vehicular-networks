@@ -1,0 +1,42 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Tuesday, 16th July 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Tuesday, 16th July 2024 
+Version: 1.0
+
+Matters arising 
+===============
+1. Implement the neighbor table containing node ids and last beacon received time.
+i.e., everytime a vehicle/RSU received a beacon from its neighbor (vehicle/RSU), add the node and beacon received time into the neighbor table if the node does not exist in the neighbor table. Otherwise, if the node exists in the neighbor table, then update the last beacon received time. 
+ACTION: sih39
+Status: Done
+
+2. Implement the functionality of neighbors (RSU/vehicles) timeout based on the last beacon received time by using timetout threshold (i.e., 3 x beaconInterval). 
+ACTION: sih39
+Status: Done
+
+3. Continie implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+Status: Ongoing
+
+4. Write the summary of papers that you have read in your dissertation under Literature Review chapter.
+ACTION: sih39
+Status: Done
+
+New business 
+============
+1. Generate csv file of neighbor information.
+- Create a new static global data structure (e.g., map or something else) and store the neighbor information of vehicles into it whenever local neighbor_table gets updated (e.g., new nb added or existing nb is removed due to timeout).
+- At RSU[0],create a timer for a fixed interval (e.g., 1 second) and add records of each vehicle's neighbors into it. 
+- CSV should have three columns (vehicle name, list of vehicle's neighbors names, simulation time [simTime])
+ACTION: sih39
+
+2. Continie implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+
+AOB
+=== 
+None
