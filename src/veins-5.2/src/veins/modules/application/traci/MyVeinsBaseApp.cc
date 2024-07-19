@@ -30,7 +30,7 @@ std::map<LAddress::L2Type, cModule*> veins::MyVeinsBaseApp::L2TocModule;
 void MyVeinsBaseApp::initialize(int stage)
 {
     BaseApplLayer::initialize(stage);
-    //cout<<"------------------------initialise Base-------------------"<<endl;
+    cout<<"------------------------initialise Base-------------------"<<endl;
 
     if (stage == 0) {
 
@@ -331,12 +331,14 @@ void MyVeinsBaseApp::checkAndTrackPacket(cMessage* msg)
 void MyVeinsBaseApp::onBSM(DemoSafetyMessage* bsm){
     MyVeinsBaseApp::updateNeighbor(bsm->getSenderId(), simTime());
     cout << L2TocModule[myId]->getFullName()<<" Neighbor Table:"<<endl;
+    cout<<"before removing Node ID: "<<endl;
     for (const auto& neighbor : neighbors) {
-        cout << "before removing Node ID: " << neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName() << ", Last Beacon: " << neighbor.second << endl;
+        cout << neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName() << ", Last Beacon: " << neighbor.second << endl;
     }
     MyVeinsBaseApp::removeExpiredNeighbors();
+    cout << "after removing Node ID: "<<endl;
     for (const auto& neighbor : neighbors) {
-        cout << "after removing Node ID: " << neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName()<< ", Last Beacon: " << neighbor.second << endl;
+        cout<< neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName()<< ", Last Beacon: " << neighbor.second << endl;
     }
 }
 
@@ -347,7 +349,7 @@ void MyVeinsBaseApp::updateNeighbor(int node_id, simtime_t last_beacon) {
 void MyVeinsBaseApp::removeExpiredNeighbors() {
     simtime_t currentTime = simTime();
     for (auto it = neighbors.begin(); it != neighbors.end(); ) {
-        if (currentTime - it->second > 0) {
+        if (currentTime - it->second > 3) {
             cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
             it = neighbors.erase(it);
         } else {

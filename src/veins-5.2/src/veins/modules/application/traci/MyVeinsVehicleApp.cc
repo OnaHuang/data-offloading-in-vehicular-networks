@@ -23,6 +23,7 @@
 #include "veins/modules/application/traci/MyVeinsVehicleApp.h"
 //#include "veins/modules/application/traci/MyVeinsMessage_m.h"
 #include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
+#include "veins/modules/application/traci/MyVeinsRSUApp.h"
 
 using namespace veins;
 using namespace std;
@@ -34,9 +35,13 @@ void MyVeinsVehicleApp::initialize(int stage)
     //cout<<"-----------------initialise--------------------"<<endl;
     MyVeinsBaseApp::initialize(stage);
     if (stage == 0) {
+        cout<<"-----------I am stage 0-----Vehicle----------"<<simTime()<<endl;
         sentMessage = false;
         lastDroveAt = simTime();
         currentSubscribedServiceId = -1;
+    }
+    else if (stage == 1) {
+        cout<<"-----------I am stage 1-----Vehicle----------"<<simTime()<<endl;
     }
     if(myId == 40){
         isEvent = true;
@@ -80,6 +85,11 @@ void MyVeinsVehicleApp::onBSM(DemoSafetyMessage* bsm)
         cout<<bsm->getEventMsg()<<endl;
         isEvent = true;
     }
+    myNbs.clear();
+    for (const auto& neighbor : neighbors) {
+        myNbs.push_back(neighbor.first);
+    }
+    MyVeinsRSUApp::globalAllNbs[myId] = myNbs;
 }
 
 void MyVeinsVehicleApp::handleSelfMsg(cMessage* msg)
@@ -139,3 +149,9 @@ void MyVeinsVehicleApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId
     MyVeinsBaseApp::populateWSM(wsm, rcvId, serial);
     //cout<<"I, vehicle "<< myId <<", have sent a beacon"<<endl;
 }
+
+//void MyVeinsVehicleApp::updateNeighbor(int node_id, simtime_t last_beacon)
+//{
+//    MyVeinsBaseApp::updateNeighbor(node_id, last_beacon);
+//    myNbs.push_front(node_id);
+//}

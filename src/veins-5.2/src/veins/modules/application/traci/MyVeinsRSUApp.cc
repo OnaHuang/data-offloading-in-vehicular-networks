@@ -23,11 +23,38 @@
 #include "veins/modules/application/traci/MyVeinsRSUApp.h"
 //#include "veins/modules/application/traci/MyVeinsMessage_m.h"
 #include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
+#include <fstream>
 
 using namespace veins;
 using namespace std;
 
 Define_Module(veins::MyVeinsRSUApp);
+unordered_map<int, std::vector<int>> veins::MyVeinsRSUApp::globalAllNbs;
+
+void MyVeinsRSUApp::initialize(int stage)
+{
+    MyVeinsBaseApp::initialize(stage);
+    if (stage == 0) {
+        // Nothing is required here when stage=0
+        cout<<"-----------I am stage 0----RSU-----------"<<simTime()<<endl;
+    }
+    else if (stage == 1) {
+        cout<<"-----------I am stage 1-----RSU----------"<<simTime()<<endl;
+        cout<<"----------------------------initialise-----------------------------------"<<endl;
+        // Initialize a timer for taking per second actions, e.g., count num nbs
+        perSecondNbCountTimer = new cMessage("Per second nb counting timer", PER_SECOND_NB_COUNT_TIMER);
+        simtime_t firstPerSecondNbCountMsg = simTime() + 1;
+        scheduleAt(firstPerSecondNbCountMsg, perSecondNbCountTimer);
+
+        if(myId==11){
+//            csvFile.open("D:/OneDrive - Aberystwyth University/Aberystwyth University/MSc/MSc Project/data.csv");
+            csvFile.open("log/data.csv");
+            if (!csvFile.is_open()) {
+                cerr << "Failed to open data.csv" << endl;
+            }
+        }
+    }
+}
 
 void MyVeinsRSUApp::onWSA(DemoServiceAdvertisment* wsa)
 {
@@ -54,10 +81,62 @@ void MyVeinsRSUApp::onBSM(DemoSafetyMessage* bsm)
         cout<<bsm->getEventMsg()<<endl;
         isEvent = true;
     }
+//    simtime_t currentTime = simTime();
+//    if(currentTime-lastEditglobalAllNbsTime>1){
+//        for (const auto& entry : globalAllNbs) {
+//            int id = entry.first;
+//            vector<int> neighborList = entry.second;
+//
+//            for (int neighbor : neighborList) {
+//                csvFile << id << "," << neighbor << "," << currentTime << "\n";
+//            }
+//        }
+//    }
+//    lastEditglobalAllNbsTime = currentTime;
 }
 
 void MyVeinsRSUApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, int serial)
 {
     MyVeinsBaseApp::populateWSM(wsm, rcvId, serial);
     //cout<<"I, RSU "<< myId <<", have sent a beacon"<<endl;
+}
+
+void MyVeinsRSUApp::finish()
+{
+    MyVeinsBaseApp::finish();
+    if(myId==11){
+        csvFile.close();
+        cout << "CSV file created successfully."<<endl;
+    }
+}
+
+void MyVeinsRSUApp::handleSelfMsg(cMessage* msg)
+{
+    switch (msg->getKind()) {
+        case PER_SECOND_NB_COUNT_TIMER: {
+            takePerSecondCountNbActionByRSU();
+            break;
+        }
+        default: {
+            MyVeinsBaseApp::handleSelfMsg(msg);
+        }
+    }
+
+
+}
+
+void MyVeinsRSUApp::takePerSecondCountNbActionByRSU()
+{
+    simtime_t currentTime = simTime();
+
+    for (const auto& entry : globalAllNbs) {
+        int id = entry.first;
+        vector<int> neighborList = entry.second;
+
+        for (int neighbor : neighborList) {
+            csvFile << id << "," << neighbor << "," << currentTime << "\n";
+        }
+    }
+    // Schedule the timer again after one second
+    scheduleAt(simTime() + 1, perSecondNbCountTimer);
 }

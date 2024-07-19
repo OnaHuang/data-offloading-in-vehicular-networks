@@ -48,6 +48,7 @@ protected:
     simtime_t lastDroveAt;
     bool sentMessage;
     int currentSubscribedServiceId;
+    vector<int> myNbs;
 
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;
@@ -58,6 +59,8 @@ protected:
     void handlePositionUpdate(cObject* obj) override;
 
     void populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId = LAddress::L2BROADCAST(), int serial = 0) override;
+//    void updateNeighbor(int node_id, simtime_t last_beacon);
+
 };
 
 } // namespace veins

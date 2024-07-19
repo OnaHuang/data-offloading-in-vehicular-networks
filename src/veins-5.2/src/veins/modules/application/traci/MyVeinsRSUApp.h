@@ -27,6 +27,7 @@
 #include "MyVeinsBaseApp.h"
 
 using namespace omnetpp;
+using namespace std;
 
 namespace veins {
 
@@ -41,11 +42,24 @@ namespace veins {
  */
 
 class VEINS_API MyVeinsRSUApp : public MyVeinsBaseApp {
+public:
+    static unordered_map<int,vector<int>> globalAllNbs;
+private:
+    ofstream csvFile;
+
 protected:
+    void initialize(int stage) override;
     void onWSM(BaseFrame1609_4* wsm) override;
     void onWSA(DemoServiceAdvertisment* wsa) override;
     void onBSM(DemoSafetyMessage* bsm) override;
     void populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId = LAddress::L2BROADCAST(), int serial = 0) override;
+    void finish() override;
+    void handleSelfMsg(cMessage* msg) override;
+    void takePerSecondCountNbActionByRSU();
+
+    simtime_t lastEditglobalAllNbsTime = 0;
+
+    cMessage* perSecondNbCountTimer;
 };
 
 } // namespace veins

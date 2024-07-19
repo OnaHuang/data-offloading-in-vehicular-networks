@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <map>
+#include <unordered_map>
 
 #include "veins/base/modules/BaseApplLayer.h"
 #include "veins/modules/utility/Consts80211p.h"
@@ -33,6 +33,8 @@
 #include "veins/modules/mac/ieee80211p/DemoBaseApplLayerToMac1609_4Interface.h"
 #include "veins/modules/mobility/traci/TraCIMobility.h"
 #include "veins/modules/mobility/traci/TraCICommandInterface.h"
+
+using namespace std;
 
 namespace veins {
 
@@ -66,7 +68,8 @@ public:
 
     enum DemoApplMessageKinds {
         SEND_BEACON_EVT,
-        SEND_WSA_EVT
+        SEND_WSA_EVT,
+        PER_SECOND_NB_COUNT_TIMER
     };
 
 protected:
@@ -190,7 +193,7 @@ protected:
     cMessage* sendBeaconEvt;
     cMessage* sendWSAEvt;
 
-    std::map<int, simtime_t> neighbors;
+    unordered_map<int, simtime_t> neighbors;
 };
 
 } // namespace veins
