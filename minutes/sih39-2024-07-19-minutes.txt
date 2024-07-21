@@ -1,0 +1,36 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Friday, 19th July 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Friday, 19th July 2024 
+Version: 1.0
+
+Matters arising 
+===============
+1. Generate csv file of neighbor information.
+- Create a new static global data structure (e.g., map or something else) and store the neighbor information of vehicles into it whenever local neighbor_table gets updated (e.g., new nb added or existing nb is removed due to timeout).
+- At RSU[0],create a timer for a fixed interval (e.g., 1 second) and add records of each vehicle's neighbors into it. 
+- CSV should have three columns (vehicle name, list of vehicle's neighbors names, simulation time [simTime])
+ACTION: sih39
+Status: Done
+
+2. Continue implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+Status: Ongoing
+
+New business 
+============
+1. Create a slightly more advance scenario with multiple vehicles having random starting position. 
+ACTION: sih39
+
+2. Generate events (e.g., accidents) at random locations and at random time. 
+ACTION: sih39
+
+3. Continue implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+
+AOB
+=== 
+None
