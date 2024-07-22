@@ -1,0 +1,45 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Monday, 22nd July 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Monday, 22nd July 2024 
+Version: 1.0
+
+Matters arising 
+===============
+1. Create a slightly more advance scenario with multiple vehicles having random starting position. 
+ACTION: sih39
+Status: Done
+
+2. Generate events (e.g., accidents) at random locations and at random time. 
+ACTION: sih39
+Status: Ongoing
+
+3. Continue implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+Status: Ongoing
+An error was encountered while accessing L2ToCModule for vehicles which have left the network. 
+Need to force removing the vehicle from its neighbor table when vehicle leaves the network.
+
+New business 
+============
+1. When a vehicle leaves the network, forcefully remove it from the neighbor tables of its neighbors. 
+ACTION: sih39
+
+2. Generate events (e.g., accidents) at random locations and at random time. 
+ACTION: sih39
+
+3. Continue implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+
+4. Mention about your preparation work in your dissertation. 
+ACTION: sih39
+
+5. Add a sample bibliography reference in your dissertation. 
+ACTION: sih39
+
+AOB
+=== 
+None

@@ -262,6 +262,8 @@ void MyVeinsBaseApp::handleSelfMsg(cMessage* msg)
 
 void MyVeinsBaseApp::finish()
 {
+
+    cout << "myId: " << myId << ", " << L2TocModule[myId]->getFullName() << ", left the network at simTime: " << simTime() << endl;
     recordScalar("generatedWSMs", generatedWSMs);
     recordScalar("receivedWSMs", receivedWSMs);
 
@@ -332,14 +334,14 @@ void MyVeinsBaseApp::onBSM(DemoSafetyMessage* bsm){
     MyVeinsBaseApp::updateNeighbor(bsm->getSenderId(), simTime());
     cout << L2TocModule[myId]->getFullName()<<" Neighbor Table:"<<endl;
     cout<<"before removing Node ID: "<<endl;
-    for (const auto& neighbor : neighbors) {
-        cout << neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName() << ", Last Beacon: " << neighbor.second << endl;
-    }
+//    for (const auto& neighbor : neighbors) {
+//        cout << neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName() << ", Last Beacon: " << neighbor.second << endl;
+//    }
     MyVeinsBaseApp::removeExpiredNeighbors();
     cout << "after removing Node ID: "<<endl;
-    for (const auto& neighbor : neighbors) {
-        cout<< neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName()<< ", Last Beacon: " << neighbor.second << endl;
-    }
+//    for (const auto& neighbor : neighbors) {
+//        cout<< neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName()<< ", Last Beacon: " << neighbor.second << endl;
+//    }
 }
 
 void MyVeinsBaseApp::updateNeighbor(int node_id, simtime_t last_beacon) {
@@ -350,8 +352,11 @@ void MyVeinsBaseApp::removeExpiredNeighbors() {
     simtime_t currentTime = simTime();
     for (auto it = neighbors.begin(); it != neighbors.end(); ) {
         if (currentTime - it->second > 3) {
-            cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
-            it = neighbors.erase(it);
+            cout << "Sim time: " << simTime() << endl;
+            if (L2TocModule[it->first]) {
+                cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
+                it = neighbors.erase(it);
+            }
         } else {
             ++it;
         }
