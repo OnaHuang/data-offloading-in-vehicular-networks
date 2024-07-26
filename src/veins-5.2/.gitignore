@@ -5,6 +5,7 @@ src/*.dylib
 src/**/*_m.h
 src/**/*_m.cc
 
+
 doc/doxy
 doc/neddoc
 
@@ -12,6 +13,7 @@ doc/neddoc
 
 /out
 
+examples/**/log
 examples/**/results
 examples/**/.tkenvrc
 examples/**/.qtenvrc
