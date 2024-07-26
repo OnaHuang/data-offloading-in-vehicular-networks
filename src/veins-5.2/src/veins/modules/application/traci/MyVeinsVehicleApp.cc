@@ -21,7 +21,7 @@
 //
 
 #include "veins/modules/application/traci/MyVeinsVehicleApp.h"
-//#include "veins/modules/application/traci/MyVeinsMessage_m.h"
+#include "veins/modules/messages/DemoSafetyMessage_m.h"
 #include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
 #include "veins/modules/application/traci/MyVeinsRSUApp.h"
 
@@ -39,6 +39,8 @@ void MyVeinsVehicleApp::initialize(int stage)
         sentMessage = false;
         lastDroveAt = simTime();
         currentSubscribedServiceId = -1;
+
+        finishInterval = par("finishInterval");
     }
     else if (stage == 1) {
         cout<<"-----------I am stage 1-----Vehicle----------"<<simTime()<<endl;
@@ -94,22 +96,30 @@ void MyVeinsVehicleApp::onBSM(DemoSafetyMessage* bsm)
 
 void MyVeinsVehicleApp::handleSelfMsg(cMessage* msg)
 {
-    if (TraCIDemo11pMessage* wsm = dynamic_cast<TraCIDemo11pMessage*>(msg)) {
-        // send this message on the service channel until the counter is 3 or higher.
-        // this code only runs when channel switching is enabled
-        sendDown(wsm->dup());
-        wsm->setSerial(wsm->getSerial() + 1);
-        if (wsm->getSerial() >= 3) {
-            // stop service advertisements
-            stopService();
-            delete (wsm);
+    switch (msg->getKind()){
+        case REMOVE_ME_AS_YOUR_NB:{
+            handleLeaveMessage(dynamic_cast<DemoSafetyMessage*>(msg));
+            break;
         }
-        else {
-            scheduleAt(simTime() + 1, wsm);
+        default:{
+            if (TraCIDemo11pMessage* wsm = dynamic_cast<TraCIDemo11pMessage*>(msg)) {
+                // send this message on the service channel until the counter is 3 or higher.
+                // this code only runs when channel switching is enabled
+                sendDown(wsm->dup());
+                wsm->setSerial(wsm->getSerial() + 1);
+                if (wsm->getSerial() >= 3) {
+                    // stop service advertisements
+                    stopService();
+                    delete (wsm);
+                }
+                else {
+                    scheduleAt(simTime() + 1, wsm);
+                }
+            }
+            else {
+                MyVeinsBaseApp::handleSelfMsg(msg);
+            }
         }
-    }
-    else {
-        MyVeinsBaseApp::handleSelfMsg(msg);
     }
 }
 
@@ -150,8 +160,25 @@ void MyVeinsVehicleApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId
     //cout<<"I, vehicle "<< myId <<", have sent a beacon"<<endl;
 }
 
-//void MyVeinsVehicleApp::updateNeighbor(int node_id, simtime_t last_beacon)
-//{
-//    MyVeinsBaseApp::updateNeighbor(node_id, last_beacon);
-//    myNbs.push_front(node_id);
-//}
+void MyVeinsVehicleApp::finish()
+{
+    //remove this vehicle from other vehicles' neighbour table
+    cout<<"---------------"<<L2TocModule[myId]->getFullName()<<" will finish-------------"<<endl;
+    removeMeFromOtherNBTable = new DemoSafetyMessage("remove me from your nb table", REMOVE_ME_AS_YOUR_NB);
+
+    //removeMeFromOtherNBTable->setKind(REMOVE_ME_AS_YOUR_NB);
+    removeMeFromOtherNBTable->setSenderId(myId);
+    scheduleAt(simTime() + finishInterval, removeMeFromOtherNBTable);
+
+    MyVeinsBaseApp::finish();
+}
+
+
+void MyVeinsVehicleApp::handleLeaveMessage(DemoSafetyMessage* msg) {
+    int leavingNodeId = msg->getSenderId();
+    auto it = neighbors.find(leavingNodeId);
+    if (it != neighbors.end()) {
+        cout<<"---------------erase: "<<it->first<<"--------------"<<endl;
+        neighbors.erase(it);
+    }
+}

@@ -262,7 +262,6 @@ void MyVeinsBaseApp::handleSelfMsg(cMessage* msg)
 
 void MyVeinsBaseApp::finish()
 {
-
     cout << "myId: " << myId << ", " << L2TocModule[myId]->getFullName() << ", left the network at simTime: " << simTime() << endl;
     recordScalar("generatedWSMs", generatedWSMs);
     recordScalar("receivedWSMs", receivedWSMs);
@@ -354,7 +353,7 @@ void MyVeinsBaseApp::removeExpiredNeighbors() {
         if (currentTime - it->second > 3) {
             cout << "Sim time: " << simTime() << endl;
             if (L2TocModule[it->first]) {
-                cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
+                //cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
                 it = neighbors.erase(it);
             }
         } else {

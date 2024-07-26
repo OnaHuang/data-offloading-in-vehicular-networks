@@ -43,12 +43,15 @@ namespace veins {
 class VEINS_API MyVeinsVehicleApp : public MyVeinsBaseApp {
 public:
     void initialize(int stage) override;
+    void finish() override;
 
 protected:
     simtime_t lastDroveAt;
     bool sentMessage;
     int currentSubscribedServiceId;
     vector<int> myNbs;
+    DemoSafetyMessage* removeMeFromOtherNBTable;
+    simtime_t finishInterval;
 
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;
@@ -60,6 +63,7 @@ protected:
 
     void populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId = LAddress::L2BROADCAST(), int serial = 0) override;
 //    void updateNeighbor(int node_id, simtime_t last_beacon);
+    void handleLeaveMessage(DemoSafetyMessage* msg);
 
 };
 

@@ -69,7 +69,8 @@ public:
     enum DemoApplMessageKinds {
         SEND_BEACON_EVT,
         SEND_WSA_EVT,
-        PER_SECOND_NB_COUNT_TIMER
+        PER_SECOND_NB_COUNT_TIMER,
+        REMOVE_ME_AS_YOUR_NB
     };
 
 protected:
