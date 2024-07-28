@@ -40,13 +40,13 @@ void MyVeinsRSUApp::initialize(int stage)
     }
     else if (stage == 1) {
         cout<<"-----------I am stage 1-----RSU----------"<<simTime()<<endl;
-        cout<<"----------------------------initialise-----------------------------------"<<endl;
         // Initialize a timer for taking per second actions, e.g., count num nbs
         perSecondNbCountTimer = new cMessage("Per second nb counting timer", PER_SECOND_NB_COUNT_TIMER);
         simtime_t firstPerSecondNbCountMsg = simTime() + 1;
         scheduleAt(firstPerSecondNbCountMsg, perSecondNbCountTimer);
 
         if(myId==11){
+            generateAccidents();//generate random accident position
 //            csvFile.open("D:/OneDrive - Aberystwyth University/Aberystwyth University/MSc/MSc Project/data.csv");
             csvFile.open("log/data.csv");
             if (!csvFile.is_open()) {
@@ -139,4 +139,12 @@ void MyVeinsRSUApp::takePerSecondCountNbActionByRSU()
     }
     // Schedule the timer again after one second
     scheduleAt(simTime() + 1, perSecondNbCountTimer);
+}
+
+void MyVeinsRSUApp::generateAccidents() {
+    for (int i = 0; i < 3; ++i) {
+        double x = uniform(0, 1000); // x range
+        double y = uniform(0, 1000); // y range
+        accidentLocations.emplace_back(x, y);
+    }
 }

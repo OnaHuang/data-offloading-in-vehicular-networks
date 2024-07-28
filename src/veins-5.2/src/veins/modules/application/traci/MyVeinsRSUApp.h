@@ -44,8 +44,13 @@ namespace veins {
 class VEINS_API MyVeinsRSUApp : public MyVeinsBaseApp {
 public:
     static unordered_map<int,vector<int>> globalAllNbs;
+
 private:
     ofstream csvFile;
+    vector<pair<double, double>> accidentLocations;
+
+public:
+    const vector<pair<double, double>>& getAccidentLocations() const;
 
 protected:
     void initialize(int stage) override;
@@ -56,10 +61,12 @@ protected:
     void finish() override;
     void handleSelfMsg(cMessage* msg) override;
     void takePerSecondCountNbActionByRSU();
+    void generateAccidents();
 
     simtime_t lastEditglobalAllNbsTime = 0;
 
     cMessage* perSecondNbCountTimer;
+
 };
 
 } // namespace veins
