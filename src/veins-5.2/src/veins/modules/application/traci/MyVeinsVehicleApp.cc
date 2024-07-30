@@ -81,7 +81,7 @@ void MyVeinsVehicleApp::onBSM(DemoSafetyMessage* bsm)
     MyVeinsBaseApp::onBSM(bsm);
     //cout<<"I, vehicle ,id: "<< myId <<", name: "<< L2TocModule[myId]->getFullName() <<", have received a beacon from "<<bsm->getSenderId()<<" ,name: "<< L2TocModule[bsm->getSenderId()]->getFullName() <<endl;
     if(bsm->isEvent()){
-        cout<<"receive event message from: "<<L2TocModule[bsm->getSenderId()]->getFullName()<<" Msg: ";
+        //cout<<"receive event message from: "<<L2TocModule[bsm->getSenderId()]->getFullName()<<" Msg: ";
         cout<<bsm->getEventMsg()<<endl;
         isEvent = true;
     }

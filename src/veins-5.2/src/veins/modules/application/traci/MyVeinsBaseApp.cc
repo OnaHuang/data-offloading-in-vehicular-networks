@@ -354,7 +354,7 @@ void MyVeinsBaseApp::removeExpiredNeighbors() {
         if (currentTime - it->second > 3) {
             cout << "Sim time: " << simTime() << endl;
             if (L2TocModule[it->first]) {
-                cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
+                //cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
                 it = neighbors.erase(it);
             }
         } else {
