@@ -58,6 +58,7 @@ void MyVeinsBaseApp::initialize(int stage)
         beaconLengthBits = par("beaconLengthBits");
         beaconUserPriority = par("beaconUserPriority");
         beaconInterval = par("beaconInterval");
+        detectAccidentMsgInterval = par("detectAccidentMsgInterval");
 
         dataLengthBits = par("dataLengthBits");
         dataOnSch = par("dataOnSch").boolValue();
@@ -73,6 +74,7 @@ void MyVeinsBaseApp::initialize(int stage)
 
         sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT);
         sendWSAEvt = new cMessage("wsa evt", SEND_WSA_EVT);
+        detectAccidentEvt = new cMessage("detect accident evt",DETECT_ACCIDENT_EVT);
 
         generatedBSMs = 0;
         generatedWSAs = 0;
@@ -111,6 +113,7 @@ void MyVeinsBaseApp::initialize(int stage)
                 scheduleAt(firstBeacon, sendBeaconEvt);
             }
         }
+        scheduleAt(simTime(), detectAccidentEvt);
     }
 }
 
@@ -253,6 +256,24 @@ void MyVeinsBaseApp::handleSelfMsg(cMessage* msg)
         scheduleAt(simTime() + wsaInterval, sendWSAEvt);
         break;
     }
+    case DETECT_ACCIDENT_EVT:{
+        // a function to check event that returns true or false
+        // e.g., bool isAccidentHappened = checkAccident()
+        // if £¨isAccidentHappened is true) {
+        //     bool isRSUinRange =  a function to check if RSU is in range
+        //          if (isRSUinRange is true) {
+        //                  create a new message
+        //                  send msg to rsu
+        //          else {
+        //                  create a new message
+        //                  broadcast msg to nb vehicles
+        //          }
+        // schedule a new timer
+
+        cout<<"---------------DETECT_ACCIDENT_EVT--------------------"<<"myId: "<<myId<<" time: "<<simTime()<<endl;
+        scheduleAt(simTime()+ detectAccidentMsgInterval, detectAccidentEvt);
+        break;
+    }
     default: {
         if (msg) EV_WARN << "APP: Error: Got Self Message of unknown kind! Name: " << msg->getName() << endl;
         break;
@@ -334,14 +355,14 @@ void MyVeinsBaseApp::onBSM(DemoSafetyMessage* bsm){
     MyVeinsBaseApp::updateNeighbor(bsm->getSenderId(), simTime());
     cout << L2TocModule[myId]->getFullName()<<" Neighbor Table:"<<endl;
     cout<<"before removing Node ID: "<<endl;
-//    for (const auto& neighbor : neighbors) {
-//        cout << neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName() << ", Last Beacon: " << neighbor.second << endl;
-//    }
+    for (const auto& neighbor : neighbors) {
+        cout<< neighbor.first << ", Last Beacon: " << neighbor.second << endl;
+    }
     MyVeinsBaseApp::removeExpiredNeighbors();
     cout << "after removing Node ID: "<<endl;
-//    for (const auto& neighbor : neighbors) {
-//        cout<< neighbor.first << ", " << L2TocModule[neighbor.first]->getFullName()<< ", Last Beacon: " << neighbor.second << endl;
-//    }
+    for (const auto& neighbor : neighbors) {
+        cout<< neighbor.first << ", Last Beacon: " << neighbor.second << endl;
+    }
 }
 
 void MyVeinsBaseApp::updateNeighbor(int node_id, simtime_t last_beacon) {

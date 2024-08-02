@@ -69,7 +69,8 @@ public:
     enum DemoApplMessageKinds {
         SEND_BEACON_EVT,
         SEND_WSA_EVT,
-        PER_SECOND_NB_COUNT_TIMER
+        PER_SECOND_NB_COUNT_TIMER,
+        DETECT_ACCIDENT_EVT
     };
 
 protected:
@@ -174,6 +175,9 @@ protected:
     Channel currentServiceChannel;
     simtime_t wsaInterval;
 
+    /* DetectAccidentMsg settings */
+    simtime_t detectAccidentMsgInterval;
+
     /* state of the vehicle */
     Coord curPosition;
     Coord curSpeed;
@@ -192,6 +196,7 @@ protected:
     /* messages for periodic events such as beacon and WSA transmissions */
     cMessage* sendBeaconEvt;
     cMessage* sendWSAEvt;
+    cMessage* detectAccidentEvt;
 
     unordered_map<int, simtime_t> neighbors;
 };
