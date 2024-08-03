@@ -1,0 +1,47 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Friday, 2nd August 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Friday, 2nd August 2024
+Version: 1.0
+
+Matters arising 
+===============
+1. Generate events (e.g., accidents) at random locations and at random time. 
+ACTION: sih39
+Status: Ongoing
+Generated events but they need to be generated at fixed places (in current scenario) and at random locations within the area of scenario/network in the future. 
+
+2. Continue implementing the algorithm of the draft of trust management in Internet of Vehicles. 
+ACTION: sih39
+Status: Ongoing
+Generated main functions and implemented the logic in those functions. 
+Need testing and validation. 
+
+3. Mention about your preparation work in your dissertation. 
+ACTION: sih39
+Status: Ongoing
+
+New business 
+============
+1. Generate events (e.g., accidents) at at fixed places in the current scenrio. 
+Future: Generate events at random locations within the area of scenario/network. 
+ACTION: sih39
+
+2. Test, validate and fix the currently implemented functions of the algorithm of trust management. 
+ACTION: sih39
+
+3. Implement the functionality for RSU to wait for a fixed time after receiving first event message from a vehicle in order to receive more messages from other vehicles. 
+ACTION: sih39
+
+3. Define the functions and provide implementation (as much as you understand) for event evaluation, feedback evaluation and trust evaluation. 
+ACTION: sih39
+
+4. Mention about your preparation work in your dissertation. 
+ACTION: sih39
+
+AOB
+=== 
+None

@@ -26,12 +26,10 @@ import veins.base.utils.SimpleAddress;
 
 namespace veins;
 
-packet DemoSafetyMessage extends BaseFrame1609_4 {
-    Coord senderPos;
-    Coord senderSpeed;
+packet AccidentNoticeMessage extends BaseFrame1609_4 {
     LAddress::L2Type senderId = -1;
     
-    bool senderType;
+    int senderType;
     bool isEvent = false;
     string eventMsg = "";
     

@@ -33,6 +33,7 @@
 #include "veins/modules/mac/ieee80211p/DemoBaseApplLayerToMac1609_4Interface.h"
 #include "veins/modules/mobility/traci/TraCIMobility.h"
 #include "veins/modules/mobility/traci/TraCICommandInterface.h"
+#include "veins/modules/messages/AccidentNoticeMessage_m.h"
 
 using namespace std;
 
@@ -57,6 +58,12 @@ using veins::TraCIMobilityAccess;
  * @see PhyLayer80211p
  * @see Decider80211p
  */
+struct nodeInfo {
+    int nodeId;
+    bool nodeType;//0--RSU, 1--Vehicle
+    simtime_t lastBeaconTime;
+};
+
 class VEINS_API MyVeinsBaseApp : public BaseApplLayer {
 
 public:
@@ -71,6 +78,12 @@ public:
         SEND_WSA_EVT,
         PER_SECOND_NB_COUNT_TIMER,
         DETECT_ACCIDENT_EVT
+    };
+
+    enum DeviceType
+    {
+        RSU = 0,
+        VEHICLE = 1
     };
 
 protected:
@@ -91,6 +104,9 @@ protected:
 
     /** @brief this function is called upon receiving a DemoServiceAdvertisement */
     virtual void onWSA(DemoServiceAdvertisment* wsa){};
+
+    /** @brief this function is called upon receiving a AccidentNoticeMessage*/
+    virtual void onANM(AccidentNoticeMessage* anm){};
 
     /** @brief this function is called every time the vehicle receives a position update signal */
     virtual void handlePositionUpdate(cObject* obj);
@@ -139,9 +155,19 @@ protected:
      */
     virtual void checkAndTrackPacket(cMessage* msg);
 
-    virtual void updateNeighbor(int node_id, simtime_t last_beacon);
+    virtual void updateNeighbor(int node_id, simtime_t last_beacon, bool neighborType);
 
     virtual void removeExpiredNeighbors();
+
+    virtual bool checkAccident();
+
+    virtual int checkRSUInRange();
+
+    virtual void generateRandomAccidentPos(){};
+
+    virtual Coord getCurrentPosition();
+
+    virtual double calculateDistance(const Coord& pos1, const Coord& pos2);
 
 protected:
     cModule* host;
@@ -198,7 +224,10 @@ protected:
     cMessage* sendWSAEvt;
     cMessage* detectAccidentEvt;
 
-    unordered_map<int, simtime_t> neighbors;
+    //unordered_map<int, simtime_t> neighbors;
+    unordered_map<int, nodeInfo> neighbors;
+    static vector<Coord> randomAccidentPosTable;
+    int myDeviceType;
 };
 
 } // namespace veins

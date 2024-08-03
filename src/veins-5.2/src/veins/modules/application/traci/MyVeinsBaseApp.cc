@@ -21,11 +21,13 @@
 //
 
 #include "MyVeinsBaseApp.h"
+#include <cstring>
 
 using namespace veins;
 using namespace std;
 
 std::map<LAddress::L2Type, cModule*> veins::MyVeinsBaseApp::L2TocModule;
+vector<Coord> veins::MyVeinsBaseApp::randomAccidentPosTable;
 
 void MyVeinsBaseApp::initialize(int stage)
 {
@@ -172,17 +174,17 @@ void MyVeinsBaseApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, i
         bsm->addBitLength(beaconLengthBits);
         wsm->setUserPriority(beaconUserPriority);
         bsm->setSenderId(myId);
-        if(isEvent){
-            bsm->setIsEvent(true);
-            bsm->setEventMsg("Traffic Accident!");
-            cout<<"set event Msg"<<endl;
-        }
+        bsm->setSenderType(myDeviceType);
     }
     else if (DemoServiceAdvertisment* wsa = dynamic_cast<DemoServiceAdvertisment*>(wsm)) {
         wsa->setChannelNumber(static_cast<int>(Channel::cch));
         wsa->setTargetChannel(static_cast<int>(currentServiceChannel));
         wsa->setPsid(currentOfferedServiceId);
         wsa->setServiceDescription(currentServiceDescription.c_str());
+    }
+    else if(AccidentNoticeMessage* anm = dynamic_cast<AccidentNoticeMessage*>(wsm)){
+        anm->setSenderId(myId);
+
     }
     else {
         if (dataOnSch)
@@ -231,6 +233,9 @@ void MyVeinsBaseApp::handleLowerMsg(cMessage* msg)
         receivedWSAs++;
         onWSA(wsa);
     }
+    else if(AccidentNoticeMessage* anm = dynamic_cast<AccidentNoticeMessage*>(wsm)){
+        onANM(anm);
+    }
     else {
         receivedWSMs++;
         onWSM(wsm);
@@ -259,7 +264,22 @@ void MyVeinsBaseApp::handleSelfMsg(cMessage* msg)
     case DETECT_ACCIDENT_EVT:{
         // a function to check event that returns true or false
         // e.g., bool isAccidentHappened = checkAccident()
-        // if £¨isAccidentHappened is true) {
+        bool isAccidentHappened = checkAccident();
+        // if (isAccidentHappened is true) {
+        if(isAccidentHappened){
+            AccidentNoticeMessage* anm = new AccidentNoticeMessage();
+            anm->setIsEvent(true);
+            anm->setEventMsg("Accident Happened");
+            anm->setSenderType(myDeviceType);
+            int RSUId = checkRSUInRange();
+            if(RSUId!=-1){//in rsu range
+                populateWSM(anm,RSUId);//send msg to rsu
+            }
+            else{//not in rsu range
+                populateWSM(anm); //broadcast msg to nb vehicles
+
+            }
+        }
         //     bool isRSUinRange =  a function to check if RSU is in range
         //          if (isRSUinRange is true) {
         //                  create a new message
@@ -268,10 +288,10 @@ void MyVeinsBaseApp::handleSelfMsg(cMessage* msg)
         //                  create a new message
         //                  broadcast msg to nb vehicles
         //          }
-        // schedule a new timer
+
 
         cout<<"---------------DETECT_ACCIDENT_EVT--------------------"<<"myId: "<<myId<<" time: "<<simTime()<<endl;
-        scheduleAt(simTime()+ detectAccidentMsgInterval, detectAccidentEvt);
+        scheduleAt(simTime()+ detectAccidentMsgInterval, detectAccidentEvt);// schedule a new timer
         break;
     }
     default: {
@@ -352,27 +372,28 @@ void MyVeinsBaseApp::checkAndTrackPacket(cMessage* msg)
 }
 
 void MyVeinsBaseApp::onBSM(DemoSafetyMessage* bsm){
-    MyVeinsBaseApp::updateNeighbor(bsm->getSenderId(), simTime());
+    updateNeighbor(bsm->getSenderId(), simTime(),myDeviceType);
     cout << L2TocModule[myId]->getFullName()<<" Neighbor Table:"<<endl;
     cout<<"before removing Node ID: "<<endl;
     for (const auto& neighbor : neighbors) {
-        cout<< neighbor.first << ", Last Beacon: " << neighbor.second << endl;
+        cout<< neighbor.first << ", Last Beacon: " << neighbor.second.lastBeaconTime << endl;
     }
     MyVeinsBaseApp::removeExpiredNeighbors();
     cout << "after removing Node ID: "<<endl;
     for (const auto& neighbor : neighbors) {
-        cout<< neighbor.first << ", Last Beacon: " << neighbor.second << endl;
+        cout<< neighbor.first << ", Last Beacon: " << neighbor.second.lastBeaconTime << endl;
     }
 }
 
-void MyVeinsBaseApp::updateNeighbor(int node_id, simtime_t last_beacon) {
-    neighbors[node_id] = last_beacon;
+void MyVeinsBaseApp::updateNeighbor(int node_id, simtime_t last_beacon, bool neighborType) {
+    nodeInfo neighborInfo = {node_id, neighborType, simTime()};
+    neighbors[node_id] = neighborInfo;
 }
 
 void MyVeinsBaseApp::removeExpiredNeighbors() {
     simtime_t currentTime = simTime();
     for (auto it = neighbors.begin(); it != neighbors.end(); ) {
-        if (currentTime - it->second > 3) {
+        if (currentTime - it->second.lastBeaconTime > 3) {
             cout << "Sim time: " << simTime() << endl;
             if (L2TocModule[it->first]) {
                 //cout << "Removing Node ID: " << it->first << ", " << L2TocModule[it->first]->getFullName()<< " due to timeout."<<endl;
@@ -382,4 +403,42 @@ void MyVeinsBaseApp::removeExpiredNeighbors() {
             ++it;
         }
     }
+}
+
+bool MyVeinsBaseApp::checkAccident(){
+
+    Coord currentPos = getCurrentPosition();
+    for (const auto& accidentPos : MyVeinsBaseApp::randomAccidentPosTable) {
+        double distance = calculateDistance(currentPos, accidentPos);
+        cout << "Distance between current position and accident position: " << distance << endl;
+
+        double distanceThreshold = 99999999.0;
+        if (distance <= distanceThreshold) {
+            cout << "Current position is within the distance threshold of an accident position." << endl;
+            return true;
+        }
+    }
+    return false;
+}
+
+int MyVeinsBaseApp::checkRSUInRange(){//if there is an rsu, return rsu's node id. If not, return -1 broadcast
+    int RSUId = -1;
+    for (const auto& pair : neighbors) {
+        const nodeInfo& info = pair.second;
+            if (info.nodeType == 0) {
+                RSUId = info.nodeId;
+                break;
+            }
+    }
+    return RSUId;
+}
+
+
+Coord MyVeinsBaseApp::getCurrentPosition()
+{
+    return curPosition;
+}
+
+double MyVeinsBaseApp::calculateDistance(const Coord& pos1, const Coord& pos2) {
+    return sqrt(pow(pos1.x - pos2.x, 2) + pow(pos1.y - pos2.y, 2));
 }

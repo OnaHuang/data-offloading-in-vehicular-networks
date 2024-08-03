@@ -60,6 +60,7 @@ protected:
 
     void populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId = LAddress::L2BROADCAST(), int serial = 0) override;
 //    void updateNeighbor(int node_id, simtime_t last_beacon);
+    void onANM(AccidentNoticeMessage* anm) override;
 
 };
 

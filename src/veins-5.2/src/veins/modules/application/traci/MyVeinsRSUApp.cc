@@ -24,18 +24,21 @@
 //#include "veins/modules/application/traci/MyVeinsMessage_m.h"
 #include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
 #include <fstream>
+#include <cstdlib>
 
 using namespace veins;
 using namespace std;
 
 Define_Module(veins::MyVeinsRSUApp);
-unordered_map<int, std::vector<int>> veins::MyVeinsRSUApp::globalAllNbs;
+unordered_map<int, vector<int>> veins::MyVeinsRSUApp::globalAllNbs;
+
 
 void MyVeinsRSUApp::initialize(int stage)
 {
     MyVeinsBaseApp::initialize(stage);
     if (stage == 0) {
         // Nothing is required here when stage=0
+        myDeviceType = RSU;
         cout<<"-----------I am stage 0----RSU-----------"<<simTime()<<endl;
     }
     else if (stage == 1) {
@@ -52,6 +55,7 @@ void MyVeinsRSUApp::initialize(int stage)
             if (!csvFile.is_open()) {
                 cerr << "Failed to open data.csv" << endl;
             }
+            generateRandomAccidentPos();
         }
     }
 }
@@ -93,6 +97,20 @@ void MyVeinsRSUApp::onBSM(DemoSafetyMessage* bsm)
 //        }
 //    }
 //    lastEditglobalAllNbsTime = currentTime;
+}
+
+void MyVeinsRSUApp::onANM(AccidentNoticeMessage* anm)
+{
+    //MyVeinsBaseApp::onANM(anm);
+    if(isNodeTrustworthy(anm->getSenderId())){
+        anm->setSenderId(myId);
+        anm->setSenderType(myDeviceType);
+        populateWSM(anm);
+    }
+    else{
+        //not trustworthy
+    }
+
 }
 
 void MyVeinsRSUApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, int serial)
@@ -139,4 +157,18 @@ void MyVeinsRSUApp::takePerSecondCountNbActionByRSU()
     }
     // Schedule the timer again after one second
     scheduleAt(simTime() + 1, perSecondNbCountTimer);
+}
+
+bool MyVeinsRSUApp::isNodeTrustworthy(LAddress::L2Type senderId)
+{
+    return rand() % 2 == 0;
+}
+
+void MyVeinsRSUApp::generateRandomAccidentPos()
+{
+    for(int i=0; i<3; ++i){
+        Coord pos(i,i+1);
+        randomAccidentPosTable.push_back(pos);
+    }
+
 }

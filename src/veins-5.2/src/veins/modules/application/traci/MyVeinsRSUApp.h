@@ -44,6 +44,7 @@ namespace veins {
 class VEINS_API MyVeinsRSUApp : public MyVeinsBaseApp {
 public:
     static unordered_map<int,vector<int>> globalAllNbs;
+    //static vector<Coord> randomAccidentPosTable;
 private:
     ofstream csvFile;
 
@@ -52,10 +53,13 @@ protected:
     void onWSM(BaseFrame1609_4* wsm) override;
     void onWSA(DemoServiceAdvertisment* wsa) override;
     void onBSM(DemoSafetyMessage* bsm) override;
+    void onANM(AccidentNoticeMessage* anm) override;
     void populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId = LAddress::L2BROADCAST(), int serial = 0) override;
     void finish() override;
     void handleSelfMsg(cMessage* msg) override;
     void takePerSecondCountNbActionByRSU();
+    bool isNodeTrustworthy(LAddress::L2Type senderId);
+    void generateRandomAccidentPos() override;
 
     simtime_t lastEditglobalAllNbsTime = 0;
 

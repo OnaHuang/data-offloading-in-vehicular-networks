@@ -35,6 +35,7 @@ void MyVeinsVehicleApp::initialize(int stage)
     //cout<<"-----------------initialise--------------------"<<endl;
     MyVeinsBaseApp::initialize(stage);
     if (stage == 0) {
+        myDeviceType = VEHICLE;
         cout<<"-----------I am stage 0-----Vehicle----------"<<simTime()<<endl;
         sentMessage = false;
         lastDroveAt = simTime();
@@ -90,6 +91,17 @@ void MyVeinsVehicleApp::onBSM(DemoSafetyMessage* bsm)
         myNbs.push_back(neighbor.first);
     }
     MyVeinsRSUApp::globalAllNbs[myId] = myNbs;
+}
+
+void MyVeinsVehicleApp::onANM(AccidentNoticeMessage* anm)
+{
+    if(anm->getSenderType()==0){//receive from RSU
+        //take an action
+    }
+    else{//receive from another vehicle
+
+        //keep it in message queue until go into rsu range, then send it to rsu
+    }
 }
 
 void MyVeinsVehicleApp::handleSelfMsg(cMessage* msg)
