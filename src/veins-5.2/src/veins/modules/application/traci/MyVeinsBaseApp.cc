@@ -185,6 +185,7 @@ void MyVeinsBaseApp::populateWSM(BaseFrame1609_4* wsm, LAddress::L2Type rcvId, i
     else if(AccidentNoticeMessage* anm = dynamic_cast<AccidentNoticeMessage*>(wsm)){
         anm->setSenderId(myId);
 
+
     }
     else {
         if (dataOnSch)
@@ -271,6 +272,7 @@ void MyVeinsBaseApp::handleSelfMsg(cMessage* msg)
             anm->setIsEvent(true);
             anm->setEventMsg("Accident Happened");
             anm->setSenderType(myDeviceType);
+            anm->setEvtLocation(curPosition);
             int RSUId = checkRSUInRange();
             if(RSUId!=-1){//in rsu range
                 populateWSM(anm,RSUId);//send msg to rsu
@@ -412,7 +414,7 @@ bool MyVeinsBaseApp::checkAccident(){
         double distance = calculateDistance(currentPos, accidentPos);
         cout << "Distance between current position and accident position: " << distance << endl;
 
-        double distanceThreshold = 99999999.0;
+        double distanceThreshold = 200.0;
         if (distance <= distanceThreshold) {
             cout << "Current position is within the distance threshold of an accident position." << endl;
             return true;

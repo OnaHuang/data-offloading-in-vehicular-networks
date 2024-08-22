@@ -77,7 +77,8 @@ public:
         SEND_BEACON_EVT,
         SEND_WSA_EVT,
         PER_SECOND_NB_COUNT_TIMER,
-        DETECT_ACCIDENT_EVT
+        DETECT_ACCIDENT_EVT,
+        PER_SECOND_ANM_TIMER
     };
 
     enum DeviceType

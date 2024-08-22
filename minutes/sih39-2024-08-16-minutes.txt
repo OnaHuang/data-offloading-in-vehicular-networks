@@ -1,0 +1,62 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Friday, 16th August 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Friday, 16th August 2024
+Version: 1.0
+
+Matters arising 
+===============
+1. Implement the functionality for RSU to either create a new record or add the received event message into one of the existing queue that lies within the threshold the event location.
+ACTION: sih39
+Status: Done
+
+2. Create a timer of one second interval at RSU that will check whether any event message queue needs to be processed now. 
+ACTION: sih39
+Status: Done
+
+3. Think about how you are going to test your work. 
+ACTION: sih39
+Status: Done
+Plan is to test using debugging and print statements to check whether the implemented things work as expected. 
+
+4. Mention about your preparation work in your dissertation. 
+ACTION: sih39
+Status: Ongoing
+
+5. Think about performance metrics and performance parameters that you will evaluate.
+And which graphs you are planning to generate. 
+ACTION: sih39
+Status: Done
+- Identified performance metrics: 
+Trust evaluation accuracy
+Confusion matrix (accuracy, precision, recall)
+- Identified performance parameters
+Vehicle density
+RSU density
+% of malicious vehicles
+
+New business 
+============
+1. Complete the implementation of RSU to analyse and process event queue and forward to vehicles, calculate reference event and reference context. 
+ACTION: sih39
+
+2. Calculate the similarity of e_i and e_*
+ACTION: sih39
+
+3. Implement the functionality of feedback evaluation and trust evaluation. 
+ACTION: sih39
+
+Future Tasks
+============
+4. Generate log files to evaluate the performance
+ACTION: sih39
+
+5. Generate graphs of performance
+ACTION: sih39
+
+AOB
+=== 
+None

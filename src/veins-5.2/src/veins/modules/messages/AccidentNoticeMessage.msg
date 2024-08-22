@@ -29,6 +29,9 @@ namespace veins;
 packet AccidentNoticeMessage extends BaseFrame1609_4 {
     LAddress::L2Type senderId = -1;
     
+    Coord evtLocation;
+    simtime_t firstEvtTime = 0;
+    
     int senderType;
     bool isEvent = false;
     string eventMsg = "";

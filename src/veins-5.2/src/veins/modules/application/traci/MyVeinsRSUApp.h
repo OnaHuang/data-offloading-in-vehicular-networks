@@ -41,6 +41,11 @@ namespace veins {
  *
  */
 
+struct evtQueueStruct{
+    simtime_t firstEvtTime;
+    vector<AccidentNoticeMessage*> evtQueue;
+};
+
 class VEINS_API MyVeinsRSUApp : public MyVeinsBaseApp {
 public:
     static unordered_map<int,vector<int>> globalAllNbs;
@@ -60,10 +65,20 @@ protected:
     void takePerSecondCountNbActionByRSU();
     bool isNodeTrustworthy(LAddress::L2Type senderId);
     void generateRandomAccidentPos() override;
-
+    void addANMQueue(AccidentNoticeMessage* newMsg);
+    void takePerSecondANMQueueActionByRSU();
+    Coord analyseEvtMsgOfOneLocation(evtQueueStruct& oneEvtQueueStruct);
     simtime_t lastEditglobalAllNbsTime = 0;
 
+    string calculateEStar(const vector<string>& events);
+    int editDistance(const string& s1, const string& s2);
+    double calculateSimilarity(const string& e_i, const string& e_star);
+    double calculate_fi(const string& e_i, const string& e_star);
+
     cMessage* perSecondNbCountTimer;
+    cMessage* perSecondANMQueueTimer;
+    vector<pair<Coord,evtQueueStruct>> allLocalEvents;
+
 };
 
 } // namespace veins
