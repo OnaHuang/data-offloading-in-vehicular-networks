@@ -49,6 +49,7 @@ struct evtQueueStruct{
 class VEINS_API MyVeinsRSUApp : public MyVeinsBaseApp {
 public:
     static unordered_map<int,vector<int>> globalAllNbs;
+    static unordered_map<LAddress::L2Type,double> feedbackMap;
     //static vector<Coord> randomAccidentPosTable;
 private:
     ofstream csvFile;

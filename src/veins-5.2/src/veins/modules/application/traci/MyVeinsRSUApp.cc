@@ -21,6 +21,7 @@
 //
 
 #include "veins/modules/application/traci/MyVeinsRSUApp.h"
+#include "veins/modules/application/traci/MyVeinsVehicleApp.h"
 //#include "veins/modules/application/traci/MyVeinsMessage_m.h"
 #include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
 #include <fstream>
@@ -31,7 +32,7 @@ using namespace std;
 
 Define_Module(veins::MyVeinsRSUApp);
 unordered_map<int, vector<int>> veins::MyVeinsRSUApp::globalAllNbs;
-
+unordered_map<LAddress::L2Type, double> veins::MyVeinsRSUApp::feedbackMap;
 
 void MyVeinsRSUApp::initialize(int stage)
 {
@@ -61,6 +62,11 @@ void MyVeinsRSUApp::initialize(int stage)
                 cerr << "Failed to open data.csv" << endl;
             }
             generateRandomAccidentPos();
+
+            maliciousPercent = par("maliciousPercent");
+            for(int i = 0; i<maliciousPercent/10; ++i){
+                MyVeinsVehicleApp::isMaliciousVehicle[i] = true;
+            }
         }
     }
 }

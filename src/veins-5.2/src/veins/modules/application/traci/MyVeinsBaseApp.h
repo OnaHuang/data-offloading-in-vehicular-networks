@@ -84,7 +84,18 @@ public:
     enum DeviceType
     {
         RSU = 0,
-        VEHICLE = 1
+        BENEVOLENT_VEHICLE = 1,
+        MALICIOUS_VEHICLE = 2
+    };
+
+    enum TrafficEvent {
+        ACCIDENT,
+        TRAFFIC_JAM,
+        ROAD_BLOCK,
+        EMERGENCY_VEHICLE,
+        WEATHER_ALERT,
+        VEHICLE_BREAKDOWN,
+        ROAD_CONSTRUCTION
     };
 
 protected:
@@ -211,6 +222,7 @@ protected:
     LAddress::L2Type myId = 0;
     int mySCH;
     bool isEvent = false;
+    int maliciousPercent;
 
     /* stats */
     uint32_t generatedWSMs;

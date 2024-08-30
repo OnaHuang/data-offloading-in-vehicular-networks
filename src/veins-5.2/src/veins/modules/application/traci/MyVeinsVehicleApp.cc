@@ -29,13 +29,25 @@ using namespace veins;
 using namespace std;
 
 Define_Module(veins::MyVeinsVehicleApp);
+int MyVeinsVehicleApp::numOfVehicles = 0;
+vector<bool> MyVeinsVehicleApp::isMaliciousVehicle(10,0);
 
 void MyVeinsVehicleApp::initialize(int stage)
 {
     //cout<<"-----------------initialise--------------------"<<endl;
     MyVeinsBaseApp::initialize(stage);
     if (stage == 0) {
-        myDeviceType = VEHICLE;
+
+        //myDeviceType = BENEVOLENT_VEHICLE;
+        ++numOfVehicles;
+        stepSize = 10;
+        if(isMaliciousVehicle[numOfVehicles%stepSize]){//10 is the step size
+            //generate malicious vehicle
+            myDeviceType = MALICIOUS_VEHICLE;
+        }
+        else{
+            myDeviceType = BENEVOLENT_VEHICLE;
+        }
         cout<<"-----------I am stage 0-----Vehicle----------"<<simTime()<<endl;
         sentMessage = false;
         lastDroveAt = simTime();

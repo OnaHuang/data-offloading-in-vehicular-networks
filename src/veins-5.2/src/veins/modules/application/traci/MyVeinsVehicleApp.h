@@ -43,12 +43,15 @@ namespace veins {
 class VEINS_API MyVeinsVehicleApp : public MyVeinsBaseApp {
 public:
     void initialize(int stage) override;
-
+    static int numOfVehicles;
+    static vector<bool> isMaliciousVehicle;
 protected:
     simtime_t lastDroveAt;
     bool sentMessage;
     int currentSubscribedServiceId;
     vector<int> myNbs;
+    int stepSize;
+
 
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;

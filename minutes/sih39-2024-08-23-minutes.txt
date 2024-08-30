@@ -1,0 +1,69 @@
+Project: MSc Project
+Meeting: Weekly Project Meeting 
+People present: Siwei Huang [sih39] and Yasir Saleem [yss1] 
+Place and date of meeting: LL-E36, Friday, 23rd August 2024 
+Circulation list: sih39 and yss1
+Author: Yasir Saleem [yss1] 
+Date of minutes: Friday, 23rd August 2024
+Version: 1.0
+
+Matters arising 
+===============
+1. Store new calculated feedback (by RSU) into the list of vehicle's feedback. 
+Data structure for vehicles' feedback: map<vehicle_id, list_of_feedback>
+ACTION: sih39
+Status: Ongoing
+Defined a data structure. Now need to store the evalauted feedback in this new data structure after evaluating it. 
+
+2. Make the vehicles' feedback map as global so that all RSUs can have up-to-date feedback of all vehicles in the network.
+ACTION: sih39
+Status: Done
+
+3. Create event messages (e.g., accident, road works, fire, earthquake, flood etc.)
+ACTION: sih39
+Status: Ongoing
+Created an Enum but now will create a list/vector of strings for event messages.
+
+4. Associate event messages (randomly) with event locations (perhaps in initialisation function).
+ACTION: sih39
+Status: Ongoing
+
+5. Introduce (or classify) benevolent vehicles and malicious vehicles. 
+ACTION: sih39
+Status: Done (needs testing)
+
+6. Provide a tunable parameter for defining the percentage of malicous vehicles (and define a default percentage of 10% of malicious vehicles). 
+The percentage of malicous vehicles can only be in the step size of 10% (e.g., 0%, 10%, 20%, 30%, ..., 100%).
+ACTION: sih39
+Status: Done
+
+7. Test the implemented protocol (code) to verify the implemented code/functions work as expected and produce the correct output. Fix the encountered issues. 
+ACTION: sih39
+Status: Ongoing
+
+New business 
+============
+1. Store new calculated feedback (by RSU) into the newly created data structure (map) of vehicle's feedback. 
+ACTION: sih39
+
+2. Create event messages (e.g., accident, road works, fire, earthquake, flood etc.) as a list/vector of strings.
+ACTION: sih39
+
+3. Associate event messages (randomly) with event locations (perhaps in initialisation function).
+ACTION: sih39
+
+4. Test the implemented protocol (code) to verify the implemented code/functions work as expected and produce the correct output. Fix the encountered issues. 
+ACTION: sih39
+
+5. Generate log files to evaluate the performance
+ACTION: sih39
+
+6. Generate graphs of performance
+ACTION: sih39
+
+7. Work on MSc dissertation.
+ACTION: sih39
+
+AOB
+=== 
+None

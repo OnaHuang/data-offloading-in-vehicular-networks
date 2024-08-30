@@ -67,6 +67,7 @@ void MyVeinsBaseApp::initialize(int stage)
         dataUserPriority = par("dataUserPriority");
 
         wsaInterval = par("wsaInterval").doubleValue();
+
         currentOfferedServiceId = -1;
 
         isParked = false;
